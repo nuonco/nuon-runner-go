@@ -1,6 +1,7 @@
 package nuonrunner
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -9,15 +10,32 @@ import (
 	"github.com/go-playground/validator/v10"
 
 	genclient "github.com/nuonco/nuon-go/client"
+
+	"github.com/nuonco/nuon-runner-go/models"
 )
 
-//
-//go:generate -command swagger go run github.com/go-swagger/go-swagger/cmd/swagger
-//go:generate swagger generate client --skip-tag-packages -f ./generate.switch
-//go:generate -command mockgen go run github.com/golang/mock/mockgen
-//go:generate mockgen -destination=mock.go -source=client.go -package=nuonrunner
+//go:generate ./generate.sh
 type Client interface {
-	// SetRunnerID(runnerID string)
+	SetRunnerID(runnerID string)
+
+	// heartbeat and health checks
+	CreateHeartBeat(ctx context.Context, req *models.ServiceCreateRunnerHeartBeatRequest) (*models.AppRunnerHeartBeat, error)
+	CreateHealthCheck(ctx context.Context, req *models.ServiceCreateRunnerHealthCheckRequest) (*models.AppRunnerHealthCheck, error)
+
+	// jobs
+	GetJobs(ctx context.Context, typ string, status string) ([]*models.AppRunnerJob, error)
+	GetJob(ctx context.Context, jobID string) (*models.AppRunnerJob, error)
+	GetJobPlan(ctx context.Context, jobID string) (interface{}, error)
+
+	// job executions
+	CreateJobExecution(ctx context.Context, jobID string, req *models.ServiceCreateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error)
+	UpdateJobExecution(ctx context.Context, jobExecutionID string, req *models.ServiceUpdateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error)
+	CreateJobExecutionHeartBeat(ctx context.Context, jobExecutionID string, req *models.ServiceCreateRunnerJobExecutionHeartBeatRequest) (*models.AppRunnerJobExecutionHeartBeat, error)
+
+	// otel operations
+	WriteOTELLogs(ctx context.Context, req interface{}) error
+	WriteOTELTraces(ctx context.Context, req interface{}) error
+	WriteOTELMetrics(ctx context.Context, req interface{}) error
 }
 
 var _ Client = (*client)(nil)

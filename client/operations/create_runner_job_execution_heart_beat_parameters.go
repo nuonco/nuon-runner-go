@@ -67,7 +67,7 @@ type CreateRunnerJobExecutionHeartBeatParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceCreateRunnerHeartBeatRequest
+	Req models.ServiceCreateRunnerJobExecutionHeartBeatRequest
 
 	/* RunnerJobID.
 
@@ -129,13 +129,13 @@ func (o *CreateRunnerJobExecutionHeartBeatParams) SetHTTPClient(client *http.Cli
 }
 
 // WithReq adds the req to the create runner job execution heart beat params
-func (o *CreateRunnerJobExecutionHeartBeatParams) WithReq(req *models.ServiceCreateRunnerHeartBeatRequest) *CreateRunnerJobExecutionHeartBeatParams {
+func (o *CreateRunnerJobExecutionHeartBeatParams) WithReq(req models.ServiceCreateRunnerJobExecutionHeartBeatRequest) *CreateRunnerJobExecutionHeartBeatParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the create runner job execution heart beat params
-func (o *CreateRunnerJobExecutionHeartBeatParams) SetReq(req *models.ServiceCreateRunnerHeartBeatRequest) {
+func (o *CreateRunnerJobExecutionHeartBeatParams) SetReq(req models.ServiceCreateRunnerJobExecutionHeartBeatRequest) {
 	o.Req = req
 }
 

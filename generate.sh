@@ -29,3 +29,9 @@ go run github.com/go-swagger/go-swagger/cmd/swagger \
   client \
   --skip-tag-packages \
   -f $url
+
+echo >&2 "generating mocks"
+go run github.com/golang/mock/mockgen \
+  -destination=mock.go \
+  -source=client.go \
+  -package=nuonrunner
