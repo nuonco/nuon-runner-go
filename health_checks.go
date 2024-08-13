@@ -3,9 +3,19 @@ package nuonrunner
 import (
 	"context"
 
+	"github.com/nuonco/nuon-runner-go/client/operations"
 	"github.com/nuonco/nuon-runner-go/models"
 )
 
 func (c *client) CreateHealthCheck(ctx context.Context, req *models.ServiceCreateRunnerHealthCheckRequest) (*models.AppRunnerHealthCheck, error) {
-	return nil, nil
+	resp, err := c.genClient.Operations.CreateRunnerHealthCheck(&operations.CreateRunnerHealthCheckParams{
+		RunnerID: c.RunnerID,
+		Req:      req,
+		Context:  ctx,
+	}, c.getAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
 }

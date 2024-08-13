@@ -56,23 +56,29 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateRunnerHealthCheck(params *CreateRunnerHealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHealthCheckOK, error)
+	CreateRunnerHealthCheck(params *CreateRunnerHealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHealthCheckCreated, error)
 
-	CreateRunnerHeartBeat(params *CreateRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHeartBeatOK, error)
+	CreateRunnerHeartBeat(params *CreateRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHeartBeatCreated, error)
 
-	CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionOK, error)
+	CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionCreated, error)
 
-	CreateRunnerJobExecutionHeartBeat(params *CreateRunnerJobExecutionHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionHeartBeatOK, error)
+	CreateRunnerJobExecutionResult(params *CreateRunnerJobExecutionResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionResultCreated, error)
+
+	GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error)
+
+	GetRunnerJobExecutions(params *GetRunnerJobExecutionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionsOK, error)
+
+	GetRunnerJobPlan(params *GetRunnerJobPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobPlanOK, error)
 
 	GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobsOK, error)
 
 	GetRunnerSettings(params *GetRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerSettingsOK, error)
 
-	RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsOK, error)
+	RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsCreated, error)
 
-	RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteMetricsOK, error)
+	RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteMetricsCreated, error)
 
-	RunnerOtelWriteTraces(params *RunnerOtelWriteTracesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteTracesOK, error)
+	RunnerOtelWriteTraces(params *RunnerOtelWriteTracesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteTracesCreated, error)
 
 	UpdateRunnerJobExecution(params *UpdateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerJobExecutionOK, error)
 
@@ -84,7 +90,7 @@ CreateRunnerHealthCheck creates a runner health check
 
 Create a runner health check.
 */
-func (a *Client) CreateRunnerHealthCheck(params *CreateRunnerHealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHealthCheckOK, error) {
+func (a *Client) CreateRunnerHealthCheck(params *CreateRunnerHealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHealthCheckCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateRunnerHealthCheckParams()
@@ -110,7 +116,7 @@ func (a *Client) CreateRunnerHealthCheck(params *CreateRunnerHealthCheckParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateRunnerHealthCheckOK)
+	success, ok := result.(*CreateRunnerHealthCheckCreated)
 	if ok {
 		return success, nil
 	}
@@ -125,7 +131,7 @@ CreateRunnerHeartBeat creates a runner heart beat
 
 Create heart beat.
 */
-func (a *Client) CreateRunnerHeartBeat(params *CreateRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHeartBeatOK, error) {
+func (a *Client) CreateRunnerHeartBeat(params *CreateRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHeartBeatCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateRunnerHeartBeatParams()
@@ -151,7 +157,7 @@ func (a *Client) CreateRunnerHeartBeat(params *CreateRunnerHeartBeatParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateRunnerHeartBeatOK)
+	success, ok := result.(*CreateRunnerHeartBeatCreated)
 	if ok {
 		return success, nil
 	}
@@ -166,7 +172,7 @@ CreateRunnerJobExecution creates runner job execution
 
 Create an execution for a runner job.
 */
-func (a *Client) CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionOK, error) {
+func (a *Client) CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateRunnerJobExecutionParams()
@@ -192,7 +198,7 @@ func (a *Client) CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateRunnerJobExecutionOK)
+	success, ok := result.(*CreateRunnerJobExecutionCreated)
 	if ok {
 		return success, nil
 	}
@@ -203,26 +209,24 @@ func (a *Client) CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams
 }
 
 /*
-	CreateRunnerJobExecutionHeartBeat creates a runner job execution heart beat
+CreateRunnerJobExecutionResult creates a runner job execution result
 
-	Write a heart beat for a specific job execution. This will be used internally to determine if a job is making progress
-
-or not.
+Write a runner job execution result, for both success/failure modes.
 */
-func (a *Client) CreateRunnerJobExecutionHeartBeat(params *CreateRunnerJobExecutionHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionHeartBeatOK, error) {
+func (a *Client) CreateRunnerJobExecutionResult(params *CreateRunnerJobExecutionResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionResultCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateRunnerJobExecutionHeartBeatParams()
+		params = NewCreateRunnerJobExecutionResultParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateRunnerJobExecutionHeartBeat",
+		ID:                 "CreateRunnerJobExecutionResult",
 		Method:             "POST",
-		PathPattern:        "/v1/runner-jobs/{runner_job_id}/heart-beats",
+		PathPattern:        "/v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}/result",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateRunnerJobExecutionHeartBeatReader{formats: a.formats},
+		Reader:             &CreateRunnerJobExecutionResultReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -235,13 +239,136 @@ func (a *Client) CreateRunnerJobExecutionHeartBeat(params *CreateRunnerJobExecut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateRunnerJobExecutionHeartBeatOK)
+	success, ok := result.(*CreateRunnerJobExecutionResultCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateRunnerJobExecutionHeartBeat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for CreateRunnerJobExecutionResult: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetRunnerJob gets runner job
+
+Return a runner job.
+*/
+func (a *Client) GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerJobParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunnerJob",
+		Method:             "GET",
+		PathPattern:        "/v1/runner-jobs/{runner_job_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerJobReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerJobOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerJob: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetRunnerJobExecutions gets runner job executions
+
+Return executions for a runner job.
+*/
+func (a *Client) GetRunnerJobExecutions(params *GetRunnerJobExecutionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerJobExecutionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunnerJobExecutions",
+		Method:             "GET",
+		PathPattern:        "/v1/runner-jobs/{runner_job_id}/executions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerJobExecutionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerJobExecutionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerJobExecutions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetRunnerJobPlan gets runner job plan
+
+Return a plan for a runner job.
+*/
+func (a *Client) GetRunnerJobPlan(params *GetRunnerJobPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobPlanOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerJobPlanParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunnerJobPlan",
+		Method:             "GET",
+		PathPattern:        "/v1/runner-jobs/{runner_job_id}/plan",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerJobPlanReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerJobPlanOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerJobPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -334,7 +461,7 @@ func (a *Client) GetRunnerSettings(params *GetRunnerSettingsParams, authInfo run
 
 stack.
 */
-func (a *Client) RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsOK, error) {
+func (a *Client) RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewRunnerOtelWriteLogsParams()
@@ -360,7 +487,7 @@ func (a *Client) RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*RunnerOtelWriteLogsOK)
+	success, ok := result.(*RunnerOtelWriteLogsCreated)
 	if ok {
 		return success, nil
 	}
@@ -377,7 +504,7 @@ func (a *Client) RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo
 
 stack.
 */
-func (a *Client) RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteMetricsOK, error) {
+func (a *Client) RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteMetricsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewRunnerOtelWriteMetricsParams()
@@ -403,7 +530,7 @@ func (a *Client) RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*RunnerOtelWriteMetricsOK)
+	success, ok := result.(*RunnerOtelWriteMetricsCreated)
 	if ok {
 		return success, nil
 	}
@@ -420,7 +547,7 @@ func (a *Client) RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, au
 
 stack.
 */
-func (a *Client) RunnerOtelWriteTraces(params *RunnerOtelWriteTracesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteTracesOK, error) {
+func (a *Client) RunnerOtelWriteTraces(params *RunnerOtelWriteTracesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteTracesCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewRunnerOtelWriteTracesParams()
@@ -446,7 +573,7 @@ func (a *Client) RunnerOtelWriteTraces(params *RunnerOtelWriteTracesParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*RunnerOtelWriteTracesOK)
+	success, ok := result.(*RunnerOtelWriteTracesCreated)
 	if ok {
 		return success, nil
 	}
@@ -468,7 +595,7 @@ func (a *Client) UpdateRunnerJobExecution(params *UpdateRunnerJobExecutionParams
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "UpdateRunnerJobExecution",
-		Method:             "POST",
+		Method:             "PATCH",
 		PathPattern:        "/v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},

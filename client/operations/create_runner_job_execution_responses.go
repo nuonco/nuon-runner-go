@@ -24,8 +24,8 @@ type CreateRunnerJobExecutionReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *CreateRunnerJobExecutionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewCreateRunnerJobExecutionOK()
+	case 201:
+		result := NewCreateRunnerJobExecutionCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -65,65 +65,65 @@ func (o *CreateRunnerJobExecutionReader) ReadResponse(response runtime.ClientRes
 	}
 }
 
-// NewCreateRunnerJobExecutionOK creates a CreateRunnerJobExecutionOK with default headers values
-func NewCreateRunnerJobExecutionOK() *CreateRunnerJobExecutionOK {
-	return &CreateRunnerJobExecutionOK{}
+// NewCreateRunnerJobExecutionCreated creates a CreateRunnerJobExecutionCreated with default headers values
+func NewCreateRunnerJobExecutionCreated() *CreateRunnerJobExecutionCreated {
+	return &CreateRunnerJobExecutionCreated{}
 }
 
 /*
-CreateRunnerJobExecutionOK describes a response with status code 200, with default header values.
+CreateRunnerJobExecutionCreated describes a response with status code 201, with default header values.
 
-OK
+Created
 */
-type CreateRunnerJobExecutionOK struct {
+type CreateRunnerJobExecutionCreated struct {
 	Payload *models.AppRunnerJobExecution
 }
 
-// IsSuccess returns true when this create runner job execution o k response has a 2xx status code
-func (o *CreateRunnerJobExecutionOK) IsSuccess() bool {
+// IsSuccess returns true when this create runner job execution created response has a 2xx status code
+func (o *CreateRunnerJobExecutionCreated) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this create runner job execution o k response has a 3xx status code
-func (o *CreateRunnerJobExecutionOK) IsRedirect() bool {
+// IsRedirect returns true when this create runner job execution created response has a 3xx status code
+func (o *CreateRunnerJobExecutionCreated) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this create runner job execution o k response has a 4xx status code
-func (o *CreateRunnerJobExecutionOK) IsClientError() bool {
+// IsClientError returns true when this create runner job execution created response has a 4xx status code
+func (o *CreateRunnerJobExecutionCreated) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this create runner job execution o k response has a 5xx status code
-func (o *CreateRunnerJobExecutionOK) IsServerError() bool {
+// IsServerError returns true when this create runner job execution created response has a 5xx status code
+func (o *CreateRunnerJobExecutionCreated) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this create runner job execution o k response a status code equal to that given
-func (o *CreateRunnerJobExecutionOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this create runner job execution created response a status code equal to that given
+func (o *CreateRunnerJobExecutionCreated) IsCode(code int) bool {
+	return code == 201
 }
 
-// Code gets the status code for the create runner job execution o k response
-func (o *CreateRunnerJobExecutionOK) Code() int {
-	return 200
+// Code gets the status code for the create runner job execution created response
+func (o *CreateRunnerJobExecutionCreated) Code() int {
+	return 201
 }
 
-func (o *CreateRunnerJobExecutionOK) Error() string {
+func (o *CreateRunnerJobExecutionCreated) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionCreated %s", 201, payload)
 }
 
-func (o *CreateRunnerJobExecutionOK) String() string {
+func (o *CreateRunnerJobExecutionCreated) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionCreated %s", 201, payload)
 }
 
-func (o *CreateRunnerJobExecutionOK) GetPayload() *models.AppRunnerJobExecution {
+func (o *CreateRunnerJobExecutionCreated) GetPayload() *models.AppRunnerJobExecution {
 	return o.Payload
 }
 
-func (o *CreateRunnerJobExecutionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *CreateRunnerJobExecutionCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppRunnerJobExecution)
 

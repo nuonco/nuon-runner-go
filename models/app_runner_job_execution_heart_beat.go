@@ -17,6 +17,9 @@ import (
 // swagger:model app.RunnerJobExecutionHeartBeat
 type AppRunnerJobExecutionHeartBeat struct {
 
+	// alive time
+	AliveTime int64 `json:"alive_time,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 

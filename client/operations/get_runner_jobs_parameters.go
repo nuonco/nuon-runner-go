@@ -62,6 +62,14 @@ GetRunnerJobsParams contains all the parameters to send to the API endpoint
 */
 type GetRunnerJobsParams struct {
 
+	/* Group.
+
+	   job group
+
+	   Default: "\"any\""
+	*/
+	Group *string
+
 	/* Limit.
 
 	   limit of jobs to return
@@ -84,14 +92,6 @@ type GetRunnerJobsParams struct {
 	*/
 	Status *string
 
-	/* Type.
-
-	   job type
-
-	   Default: "\"all\""
-	*/
-	Type *string
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -110,17 +110,17 @@ func (o *GetRunnerJobsParams) WithDefaults() *GetRunnerJobsParams {
 // All values with no default are reset to their zero value.
 func (o *GetRunnerJobsParams) SetDefaults() {
 	var (
+		groupDefault = string("\"any\"")
+
 		limitDefault = int64(10)
 
 		statusDefault = string("\"available\"")
-
-		typeVarDefault = string("\"all\"")
 	)
 
 	val := GetRunnerJobsParams{
+		Group:  &groupDefault,
 		Limit:  &limitDefault,
 		Status: &statusDefault,
-		Type:   &typeVarDefault,
 	}
 
 	val.timeout = o.timeout
@@ -162,6 +162,17 @@ func (o *GetRunnerJobsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithGroup adds the group to the get runner jobs params
+func (o *GetRunnerJobsParams) WithGroup(group *string) *GetRunnerJobsParams {
+	o.SetGroup(group)
+	return o
+}
+
+// SetGroup adds the group to the get runner jobs params
+func (o *GetRunnerJobsParams) SetGroup(group *string) {
+	o.Group = group
+}
+
 // WithLimit adds the limit to the get runner jobs params
 func (o *GetRunnerJobsParams) WithLimit(limit *int64) *GetRunnerJobsParams {
 	o.SetLimit(limit)
@@ -195,17 +206,6 @@ func (o *GetRunnerJobsParams) SetStatus(status *string) {
 	o.Status = status
 }
 
-// WithType adds the typeVar to the get runner jobs params
-func (o *GetRunnerJobsParams) WithType(typeVar *string) *GetRunnerJobsParams {
-	o.SetType(typeVar)
-	return o
-}
-
-// SetType adds the type to the get runner jobs params
-func (o *GetRunnerJobsParams) SetType(typeVar *string) {
-	o.Type = typeVar
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -213,6 +213,23 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
+	if o.Group != nil {
+
+		// query param group
+		var qrGroup string
+
+		if o.Group != nil {
+			qrGroup = *o.Group
+		}
+		qGroup := qrGroup
+		if qGroup != "" {
+
+			if err := r.SetQueryParam("group", qGroup); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.Limit != nil {
 
@@ -248,23 +265,6 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qStatus != "" {
 
 			if err := r.SetQueryParam("status", qStatus); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Type != nil {
-
-		// query param type
-		var qrType string
-
-		if o.Type != nil {
-			qrType = *o.Type
-		}
-		qType := qrType
-		if qType != "" {
-
-			if err := r.SetQueryParam("type", qType); err != nil {
 				return err
 			}
 		}

@@ -9,7 +9,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-playground/validator/v10"
 
-	genclient "github.com/nuonco/nuon-go/client"
+	genclient "github.com/nuonco/nuon-runner-go/client"
 
 	"github.com/nuonco/nuon-runner-go/models"
 )
@@ -18,19 +18,22 @@ import (
 type Client interface {
 	SetRunnerID(runnerID string)
 
+	GetSettings(ctx context.Context) (*models.AppRunnerGroupSettings, error)
+
 	// heartbeat and health checks
 	CreateHeartBeat(ctx context.Context, req *models.ServiceCreateRunnerHeartBeatRequest) (*models.AppRunnerHeartBeat, error)
 	CreateHealthCheck(ctx context.Context, req *models.ServiceCreateRunnerHealthCheckRequest) (*models.AppRunnerHealthCheck, error)
 
 	// jobs
-	GetJobs(ctx context.Context, typ string, status string) ([]*models.AppRunnerJob, error)
+	GetJobs(ctx context.Context, grp models.AppRunnerJobGroup, status models.AppRunnerJobStatus, limit *int64) ([]*models.AppRunnerJob, error)
 	GetJob(ctx context.Context, jobID string) (*models.AppRunnerJob, error)
-	GetJobPlan(ctx context.Context, jobID string) (interface{}, error)
+	GetJobPlan(ctx context.Context, jobID string) (*models.Planv1Plan, error)
 
 	// job executions
+	GetJobExecutions(ctx context.Context, jobID string) ([]*models.AppRunnerJobExecution, error)
 	CreateJobExecution(ctx context.Context, jobID string, req *models.ServiceCreateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error)
-	UpdateJobExecution(ctx context.Context, jobExecutionID string, req *models.ServiceUpdateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error)
-	CreateJobExecutionHeartBeat(ctx context.Context, jobExecutionID string, req *models.ServiceCreateRunnerJobExecutionHeartBeatRequest) (*models.AppRunnerJobExecutionHeartBeat, error)
+	UpdateJobExecution(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceUpdateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error)
+	CreateJobExecutionResult(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceCreateRunnerJobExecutionResultRequest) (*models.AppRunnerJobExecutionResult, error)
 
 	// otel operations
 	WriteOTELLogs(ctx context.Context, req interface{}) error
@@ -47,7 +50,7 @@ type client struct {
 	APIToken string
 	RunnerID string
 
-	genClient    *genclient.Nuon
+	genClient    *genclient.NuonRunnerAPI
 	appTransport *appTransport
 }
 

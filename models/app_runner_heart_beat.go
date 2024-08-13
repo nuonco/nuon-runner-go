@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -19,7 +18,7 @@ import (
 type AppRunnerHeartBeat struct {
 
 	// alive time
-	AliveTime TimeDuration `json:"alive_time,omitempty"`
+	AliveTime int64 `json:"alive_time,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -30,9 +29,6 @@ type AppRunnerHeartBeat struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// jobs in progress
-	JobsInProgress int64 `json:"jobs_in_progress,omitempty"`
-
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 
@@ -42,64 +38,11 @@ type AppRunnerHeartBeat struct {
 
 // Validate validates this app runner heart beat
 func (m *AppRunnerHeartBeat) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateAliveTime(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppRunnerHeartBeat) validateAliveTime(formats strfmt.Registry) error {
-	if swag.IsZero(m.AliveTime) { // not required
-		return nil
-	}
-
-	if err := m.AliveTime.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("alive_time")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("alive_time")
-		}
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app runner heart beat based on the context it is used
+// ContextValidate validates this app runner heart beat based on context it is used
 func (m *AppRunnerHeartBeat) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateAliveTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppRunnerHeartBeat) contextValidateAliveTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.AliveTime) { // not required
-		return nil
-	}
-
-	if err := m.AliveTime.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("alive_time")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("alive_time")
-		}
-		return err
-	}
-
 	return nil
 }
 

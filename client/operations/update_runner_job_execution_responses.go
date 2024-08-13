@@ -61,7 +61,7 @@ func (o *UpdateRunnerJobExecutionReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}] UpdateRunnerJobExecution", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}] UpdateRunnerJobExecution", response, response.Code())
 	}
 }
 
@@ -111,12 +111,12 @@ func (o *UpdateRunnerJobExecutionOK) Code() int {
 
 func (o *UpdateRunnerJobExecutionOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionOK %s", 200, payload)
 }
 
 func (o *UpdateRunnerJobExecutionOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionOK %s", 200, payload)
 }
 
 func (o *UpdateRunnerJobExecutionOK) GetPayload() *models.AppRunnerJobExecution {
@@ -181,12 +181,12 @@ func (o *UpdateRunnerJobExecutionBadRequest) Code() int {
 
 func (o *UpdateRunnerJobExecutionBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionBadRequest %s", 400, payload)
 }
 
 func (o *UpdateRunnerJobExecutionBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionBadRequest %s", 400, payload)
 }
 
 func (o *UpdateRunnerJobExecutionBadRequest) GetPayload() *models.StderrErrResponse {
@@ -251,12 +251,12 @@ func (o *UpdateRunnerJobExecutionUnauthorized) Code() int {
 
 func (o *UpdateRunnerJobExecutionUnauthorized) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateRunnerJobExecutionUnauthorized) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateRunnerJobExecutionUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -321,12 +321,12 @@ func (o *UpdateRunnerJobExecutionForbidden) Code() int {
 
 func (o *UpdateRunnerJobExecutionForbidden) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionForbidden %s", 403, payload)
 }
 
 func (o *UpdateRunnerJobExecutionForbidden) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionForbidden %s", 403, payload)
 }
 
 func (o *UpdateRunnerJobExecutionForbidden) GetPayload() *models.StderrErrResponse {
@@ -391,12 +391,12 @@ func (o *UpdateRunnerJobExecutionNotFound) Code() int {
 
 func (o *UpdateRunnerJobExecutionNotFound) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionNotFound %s", 404, payload)
 }
 
 func (o *UpdateRunnerJobExecutionNotFound) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionNotFound %s", 404, payload)
 }
 
 func (o *UpdateRunnerJobExecutionNotFound) GetPayload() *models.StderrErrResponse {
@@ -461,12 +461,12 @@ func (o *UpdateRunnerJobExecutionInternalServerError) Code() int {
 
 func (o *UpdateRunnerJobExecutionInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateRunnerJobExecutionInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}][%d] updateRunnerJobExecutionInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateRunnerJobExecutionInternalServerError) GetPayload() *models.StderrErrResponse {

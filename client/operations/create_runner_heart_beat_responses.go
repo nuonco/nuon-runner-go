@@ -24,8 +24,8 @@ type CreateRunnerHeartBeatReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *CreateRunnerHeartBeatReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewCreateRunnerHeartBeatOK()
+	case 201:
+		result := NewCreateRunnerHeartBeatCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -65,65 +65,65 @@ func (o *CreateRunnerHeartBeatReader) ReadResponse(response runtime.ClientRespon
 	}
 }
 
-// NewCreateRunnerHeartBeatOK creates a CreateRunnerHeartBeatOK with default headers values
-func NewCreateRunnerHeartBeatOK() *CreateRunnerHeartBeatOK {
-	return &CreateRunnerHeartBeatOK{}
+// NewCreateRunnerHeartBeatCreated creates a CreateRunnerHeartBeatCreated with default headers values
+func NewCreateRunnerHeartBeatCreated() *CreateRunnerHeartBeatCreated {
+	return &CreateRunnerHeartBeatCreated{}
 }
 
 /*
-CreateRunnerHeartBeatOK describes a response with status code 200, with default header values.
+CreateRunnerHeartBeatCreated describes a response with status code 201, with default header values.
 
-OK
+Created
 */
-type CreateRunnerHeartBeatOK struct {
+type CreateRunnerHeartBeatCreated struct {
 	Payload *models.AppRunnerHeartBeat
 }
 
-// IsSuccess returns true when this create runner heart beat o k response has a 2xx status code
-func (o *CreateRunnerHeartBeatOK) IsSuccess() bool {
+// IsSuccess returns true when this create runner heart beat created response has a 2xx status code
+func (o *CreateRunnerHeartBeatCreated) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this create runner heart beat o k response has a 3xx status code
-func (o *CreateRunnerHeartBeatOK) IsRedirect() bool {
+// IsRedirect returns true when this create runner heart beat created response has a 3xx status code
+func (o *CreateRunnerHeartBeatCreated) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this create runner heart beat o k response has a 4xx status code
-func (o *CreateRunnerHeartBeatOK) IsClientError() bool {
+// IsClientError returns true when this create runner heart beat created response has a 4xx status code
+func (o *CreateRunnerHeartBeatCreated) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this create runner heart beat o k response has a 5xx status code
-func (o *CreateRunnerHeartBeatOK) IsServerError() bool {
+// IsServerError returns true when this create runner heart beat created response has a 5xx status code
+func (o *CreateRunnerHeartBeatCreated) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this create runner heart beat o k response a status code equal to that given
-func (o *CreateRunnerHeartBeatOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this create runner heart beat created response a status code equal to that given
+func (o *CreateRunnerHeartBeatCreated) IsCode(code int) bool {
+	return code == 201
 }
 
-// Code gets the status code for the create runner heart beat o k response
-func (o *CreateRunnerHeartBeatOK) Code() int {
-	return 200
+// Code gets the status code for the create runner heart beat created response
+func (o *CreateRunnerHeartBeatCreated) Code() int {
+	return 201
 }
 
-func (o *CreateRunnerHeartBeatOK) Error() string {
+func (o *CreateRunnerHeartBeatCreated) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatCreated %s", 201, payload)
 }
 
-func (o *CreateRunnerHeartBeatOK) String() string {
+func (o *CreateRunnerHeartBeatCreated) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatCreated %s", 201, payload)
 }
 
-func (o *CreateRunnerHeartBeatOK) GetPayload() *models.AppRunnerHeartBeat {
+func (o *CreateRunnerHeartBeatCreated) GetPayload() *models.AppRunnerHeartBeat {
 	return o.Payload
 }
 
-func (o *CreateRunnerHeartBeatOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *CreateRunnerHeartBeatCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppRunnerHeartBeat)
 

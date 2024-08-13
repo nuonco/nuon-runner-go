@@ -24,8 +24,8 @@ type RunnerOtelWriteMetricsReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *RunnerOtelWriteMetricsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewRunnerOtelWriteMetricsOK()
+	case 201:
+		result := NewRunnerOtelWriteMetricsCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -65,65 +65,65 @@ func (o *RunnerOtelWriteMetricsReader) ReadResponse(response runtime.ClientRespo
 	}
 }
 
-// NewRunnerOtelWriteMetricsOK creates a RunnerOtelWriteMetricsOK with default headers values
-func NewRunnerOtelWriteMetricsOK() *RunnerOtelWriteMetricsOK {
-	return &RunnerOtelWriteMetricsOK{}
+// NewRunnerOtelWriteMetricsCreated creates a RunnerOtelWriteMetricsCreated with default headers values
+func NewRunnerOtelWriteMetricsCreated() *RunnerOtelWriteMetricsCreated {
+	return &RunnerOtelWriteMetricsCreated{}
 }
 
 /*
-RunnerOtelWriteMetricsOK describes a response with status code 200, with default header values.
+RunnerOtelWriteMetricsCreated describes a response with status code 201, with default header values.
 
-OK
+Created
 */
-type RunnerOtelWriteMetricsOK struct {
+type RunnerOtelWriteMetricsCreated struct {
 	Payload string
 }
 
-// IsSuccess returns true when this runner otel write metrics o k response has a 2xx status code
-func (o *RunnerOtelWriteMetricsOK) IsSuccess() bool {
+// IsSuccess returns true when this runner otel write metrics created response has a 2xx status code
+func (o *RunnerOtelWriteMetricsCreated) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this runner otel write metrics o k response has a 3xx status code
-func (o *RunnerOtelWriteMetricsOK) IsRedirect() bool {
+// IsRedirect returns true when this runner otel write metrics created response has a 3xx status code
+func (o *RunnerOtelWriteMetricsCreated) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this runner otel write metrics o k response has a 4xx status code
-func (o *RunnerOtelWriteMetricsOK) IsClientError() bool {
+// IsClientError returns true when this runner otel write metrics created response has a 4xx status code
+func (o *RunnerOtelWriteMetricsCreated) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this runner otel write metrics o k response has a 5xx status code
-func (o *RunnerOtelWriteMetricsOK) IsServerError() bool {
+// IsServerError returns true when this runner otel write metrics created response has a 5xx status code
+func (o *RunnerOtelWriteMetricsCreated) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this runner otel write metrics o k response a status code equal to that given
-func (o *RunnerOtelWriteMetricsOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this runner otel write metrics created response a status code equal to that given
+func (o *RunnerOtelWriteMetricsCreated) IsCode(code int) bool {
+	return code == 201
 }
 
-// Code gets the status code for the runner otel write metrics o k response
-func (o *RunnerOtelWriteMetricsOK) Code() int {
-	return 200
+// Code gets the status code for the runner otel write metrics created response
+func (o *RunnerOtelWriteMetricsCreated) Code() int {
+	return 201
 }
 
-func (o *RunnerOtelWriteMetricsOK) Error() string {
+func (o *RunnerOtelWriteMetricsCreated) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsCreated %s", 201, payload)
 }
 
-func (o *RunnerOtelWriteMetricsOK) String() string {
+func (o *RunnerOtelWriteMetricsCreated) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsCreated %s", 201, payload)
 }
 
-func (o *RunnerOtelWriteMetricsOK) GetPayload() string {
+func (o *RunnerOtelWriteMetricsCreated) GetPayload() string {
 	return o.Payload
 }
 
-func (o *RunnerOtelWriteMetricsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *RunnerOtelWriteMetricsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {

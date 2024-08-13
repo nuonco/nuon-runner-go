@@ -27,9 +27,6 @@ type AppRunnerJobExecution struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// finished at
-	FinishedAt string `json:"finished_at,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -39,11 +36,11 @@ type AppRunnerJobExecution struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// result
+	Result *AppRunnerJobExecutionResult `json:"result,omitempty"`
+
 	// runner job id
 	RunnerJobID string `json:"runner_job_id,omitempty"`
-
-	// started at
-	StartedAt string `json:"started_at,omitempty"`
 
 	// status
 	Status AppRunnerJobExecutionStatus `json:"status,omitempty"`
@@ -61,6 +58,10 @@ func (m *AppRunnerJobExecution) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrg(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResult(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -112,6 +113,25 @@ func (m *AppRunnerJobExecution) validateOrg(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppRunnerJobExecution) validateResult(formats strfmt.Registry) error {
+	if swag.IsZero(m.Result) { // not required
+		return nil
+	}
+
+	if m.Result != nil {
+		if err := m.Result.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("result")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("result")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppRunnerJobExecution) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -138,6 +158,10 @@ func (m *AppRunnerJobExecution) ContextValidate(ctx context.Context, formats str
 	}
 
 	if err := m.contextValidateOrg(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateResult(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -185,6 +209,27 @@ func (m *AppRunnerJobExecution) contextValidateOrg(ctx context.Context, formats 
 				return ve.ValidateName("org")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("org")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppRunnerJobExecution) contextValidateResult(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Result != nil {
+
+		if swag.IsZero(m.Result) { // not required
+			return nil
+		}
+
+		if err := m.Result.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("result")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("result")
 			}
 			return err
 		}

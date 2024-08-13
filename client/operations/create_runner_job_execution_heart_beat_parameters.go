@@ -67,7 +67,13 @@ type CreateRunnerJobExecutionHeartBeatParams struct {
 
 	   Input
 	*/
-	Req models.ServiceCreateRunnerJobExecutionHeartBeatRequest
+	Req *models.ServiceCreateRunnerJobExecutionHeartBeatRequest
+
+	/* RunnerJobExecutionID.
+
+	   runner job ID
+	*/
+	RunnerJobExecutionID string
 
 	/* RunnerJobID.
 
@@ -129,14 +135,25 @@ func (o *CreateRunnerJobExecutionHeartBeatParams) SetHTTPClient(client *http.Cli
 }
 
 // WithReq adds the req to the create runner job execution heart beat params
-func (o *CreateRunnerJobExecutionHeartBeatParams) WithReq(req models.ServiceCreateRunnerJobExecutionHeartBeatRequest) *CreateRunnerJobExecutionHeartBeatParams {
+func (o *CreateRunnerJobExecutionHeartBeatParams) WithReq(req *models.ServiceCreateRunnerJobExecutionHeartBeatRequest) *CreateRunnerJobExecutionHeartBeatParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the create runner job execution heart beat params
-func (o *CreateRunnerJobExecutionHeartBeatParams) SetReq(req models.ServiceCreateRunnerJobExecutionHeartBeatRequest) {
+func (o *CreateRunnerJobExecutionHeartBeatParams) SetReq(req *models.ServiceCreateRunnerJobExecutionHeartBeatRequest) {
 	o.Req = req
+}
+
+// WithRunnerJobExecutionID adds the runnerJobExecutionID to the create runner job execution heart beat params
+func (o *CreateRunnerJobExecutionHeartBeatParams) WithRunnerJobExecutionID(runnerJobExecutionID string) *CreateRunnerJobExecutionHeartBeatParams {
+	o.SetRunnerJobExecutionID(runnerJobExecutionID)
+	return o
+}
+
+// SetRunnerJobExecutionID adds the runnerJobExecutionId to the create runner job execution heart beat params
+func (o *CreateRunnerJobExecutionHeartBeatParams) SetRunnerJobExecutionID(runnerJobExecutionID string) {
+	o.RunnerJobExecutionID = runnerJobExecutionID
 }
 
 // WithRunnerJobID adds the runnerJobID to the create runner job execution heart beat params
@@ -161,6 +178,11 @@ func (o *CreateRunnerJobExecutionHeartBeatParams) WriteToRequest(r runtime.Clien
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err
 		}
+	}
+
+	// path param runner_job_execution_id
+	if err := r.SetPathParam("runner_job_execution_id", o.RunnerJobExecutionID); err != nil {
+		return err
 	}
 
 	// path param runner_job_id

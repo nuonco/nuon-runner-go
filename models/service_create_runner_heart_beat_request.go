@@ -21,11 +21,7 @@ type ServiceCreateRunnerHeartBeatRequest struct {
 
 	// alive time
 	// Required: true
-	AliveTime *TimeDuration `json:"alive_time"`
-
-	// jobs in flight
-	// Required: true
-	JobsInFlight *int64 `json:"jobs_in_flight"`
+	AliveTime *int64 `json:"alive_time"`
 }
 
 // Validate validates this service create runner heart beat request
@@ -33,10 +29,6 @@ func (m *ServiceCreateRunnerHeartBeatRequest) Validate(formats strfmt.Registry) 
 	var res []error
 
 	if err := m.validateAliveTime(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateJobsInFlight(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -52,61 +44,11 @@ func (m *ServiceCreateRunnerHeartBeatRequest) validateAliveTime(formats strfmt.R
 		return err
 	}
 
-	if err := validate.Required("alive_time", "body", m.AliveTime); err != nil {
-		return err
-	}
-
-	if m.AliveTime != nil {
-		if err := m.AliveTime.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("alive_time")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("alive_time")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
-func (m *ServiceCreateRunnerHeartBeatRequest) validateJobsInFlight(formats strfmt.Registry) error {
-
-	if err := validate.Required("jobs_in_flight", "body", m.JobsInFlight); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this service create runner heart beat request based on the context it is used
+// ContextValidate validates this service create runner heart beat request based on context it is used
 func (m *ServiceCreateRunnerHeartBeatRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateAliveTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ServiceCreateRunnerHeartBeatRequest) contextValidateAliveTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.AliveTime != nil {
-
-		if err := m.AliveTime.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("alive_time")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("alive_time")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

@@ -19,6 +19,9 @@ import (
 // swagger:model app.RunnerJob
 type AppRunnerJob struct {
 
+	// available timeout is how long a job can be marked as "available" before being requeued
+	AvailableTimeout int64 `json:"available_timeout,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -28,11 +31,14 @@ type AppRunnerJob struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// execution timeout
+	// execution timeout is how long a job can be marked as "exeucuting" before being requeued
 	ExecutionTimeout int64 `json:"execution_timeout,omitempty"`
 
 	// executions
 	Executions []*AppRunnerJobExecution `json:"executions"`
+
+	// group
+	Group AppRunnerJobGroup `json:"group,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -40,29 +46,32 @@ type AppRunnerJob struct {
 	// max executions
 	MaxExecutions int64 `json:"max_executions,omitempty"`
 
+	// operation
+	Operation AppRunnerJobOperationType `json:"operation,omitempty"`
+
 	// org
 	Org *AppOrg `json:"org,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
-	// overall timeout
+	// overall timeout is how long a job can be attempted, before being cancelled
 	OverallTimeout int64 `json:"overall_timeout,omitempty"`
 
-	// queue timeout
+	// queue timeout is how long a job can be queued, before being made available
 	QueueTimeout int64 `json:"queue_timeout,omitempty"`
 
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 
 	// status
-	Status string `json:"status,omitempty"`
+	Status AppRunnerJobStatus `json:"status,omitempty"`
 
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
 
 	// type
-	Type string `json:"type,omitempty"`
+	Type AppRunnerJobType `json:"type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -80,7 +89,23 @@ func (m *AppRunnerJob) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOperation(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateOrg(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -135,6 +160,40 @@ func (m *AppRunnerJob) validateExecutions(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppRunnerJob) validateGroup(formats strfmt.Registry) error {
+	if swag.IsZero(m.Group) { // not required
+		return nil
+	}
+
+	if err := m.Group.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("group")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("group")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *AppRunnerJob) validateOperation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Operation) { // not required
+		return nil
+	}
+
+	if err := m.Operation.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("operation")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("operation")
+		}
+		return err
+	}
+
+	return nil
+}
+
 func (m *AppRunnerJob) validateOrg(formats strfmt.Registry) error {
 	if swag.IsZero(m.Org) { // not required
 		return nil
@@ -154,6 +213,40 @@ func (m *AppRunnerJob) validateOrg(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppRunnerJob) validateStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	if err := m.Status.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("status")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("status")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *AppRunnerJob) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app runner job based on the context it is used
 func (m *AppRunnerJob) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -166,7 +259,23 @@ func (m *AppRunnerJob) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGroup(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateOrg(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -222,6 +331,42 @@ func (m *AppRunnerJob) contextValidateExecutions(ctx context.Context, formats st
 	return nil
 }
 
+func (m *AppRunnerJob) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Group) { // not required
+		return nil
+	}
+
+	if err := m.Group.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("group")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("group")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *AppRunnerJob) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Operation) { // not required
+		return nil
+	}
+
+	if err := m.Operation.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("operation")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("operation")
+		}
+		return err
+	}
+
+	return nil
+}
+
 func (m *AppRunnerJob) contextValidateOrg(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Org != nil {
@@ -238,6 +383,42 @@ func (m *AppRunnerJob) contextValidateOrg(ctx context.Context, formats strfmt.Re
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppRunnerJob) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	if err := m.Status.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("status")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("status")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *AppRunnerJob) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
 	}
 
 	return nil

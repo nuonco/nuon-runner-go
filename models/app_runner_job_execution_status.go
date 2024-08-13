@@ -39,6 +39,9 @@ const (
 	// AppRunnerJobExecutionStatusInDashProgress captures enum value "in-progress"
 	AppRunnerJobExecutionStatusInDashProgress AppRunnerJobExecutionStatus = "in-progress"
 
+	// AppRunnerJobExecutionStatusCleaningDashUp captures enum value "cleaning-up"
+	AppRunnerJobExecutionStatusCleaningDashUp AppRunnerJobExecutionStatus = "cleaning-up"
+
 	// AppRunnerJobExecutionStatusFinished captures enum value "finished"
 	AppRunnerJobExecutionStatusFinished AppRunnerJobExecutionStatus = "finished"
 
@@ -47,6 +50,15 @@ const (
 
 	// AppRunnerJobExecutionStatusTimedDashOut captures enum value "timed-out"
 	AppRunnerJobExecutionStatusTimedDashOut AppRunnerJobExecutionStatus = "timed-out"
+
+	// AppRunnerJobExecutionStatusNotDashAttempted captures enum value "not-attempted"
+	AppRunnerJobExecutionStatusNotDashAttempted AppRunnerJobExecutionStatus = "not-attempted"
+
+	// AppRunnerJobExecutionStatusCancelled captures enum value "cancelled"
+	AppRunnerJobExecutionStatusCancelled AppRunnerJobExecutionStatus = "cancelled"
+
+	// AppRunnerJobExecutionStatusUnknown captures enum value "unknown"
+	AppRunnerJobExecutionStatusUnknown AppRunnerJobExecutionStatus = "unknown"
 )
 
 // for schema
@@ -54,7 +66,7 @@ var appRunnerJobExecutionStatusEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobExecutionStatus
-	if err := json.Unmarshal([]byte(`["pending","initializing","in-progress","finished","failed","timed-out"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["pending","initializing","in-progress","cleaning-up","finished","failed","timed-out","not-attempted","cancelled","unknown"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

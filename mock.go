@@ -80,19 +80,19 @@ func (mr *MockClientMockRecorder) CreateJobExecution(ctx, jobID, req interface{}
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateJobExecution", reflect.TypeOf((*MockClient)(nil).CreateJobExecution), ctx, jobID, req)
 }
 
-// CreateJobExecutionHeartBeat mocks base method.
-func (m *MockClient) CreateJobExecutionHeartBeat(ctx context.Context, typ, status string) (*models.AppRunnerJobExecutionHeartBeat, error) {
+// CreateJobExecutionResult mocks base method.
+func (m *MockClient) CreateJobExecutionResult(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceCreateRunnerJobExecutionResultRequest) (*models.AppRunnerJobExecutionResult, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateJobExecutionHeartBeat", ctx, typ, status)
-	ret0, _ := ret[0].(*models.AppRunnerJobExecutionHeartBeat)
+	ret := m.ctrl.Call(m, "CreateJobExecutionResult", ctx, jobID, jobExecutionID, req)
+	ret0, _ := ret[0].(*models.AppRunnerJobExecutionResult)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// CreateJobExecutionHeartBeat indicates an expected call of CreateJobExecutionHeartBeat.
-func (mr *MockClientMockRecorder) CreateJobExecutionHeartBeat(ctx, typ, status interface{}) *gomock.Call {
+// CreateJobExecutionResult indicates an expected call of CreateJobExecutionResult.
+func (mr *MockClientMockRecorder) CreateJobExecutionResult(ctx, jobID, jobExecutionID, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateJobExecutionHeartBeat", reflect.TypeOf((*MockClient)(nil).CreateJobExecutionHeartBeat), ctx, typ, status)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateJobExecutionResult", reflect.TypeOf((*MockClient)(nil).CreateJobExecutionResult), ctx, jobID, jobExecutionID, req)
 }
 
 // GetJob mocks base method.
@@ -110,11 +110,26 @@ func (mr *MockClientMockRecorder) GetJob(ctx, jobID interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetJob", reflect.TypeOf((*MockClient)(nil).GetJob), ctx, jobID)
 }
 
+// GetJobExecutions mocks base method.
+func (m *MockClient) GetJobExecutions(ctx context.Context, jobID string) ([]*models.AppRunnerJobExecution, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetJobExecutions", ctx, jobID)
+	ret0, _ := ret[0].([]*models.AppRunnerJobExecution)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetJobExecutions indicates an expected call of GetJobExecutions.
+func (mr *MockClientMockRecorder) GetJobExecutions(ctx, jobID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetJobExecutions", reflect.TypeOf((*MockClient)(nil).GetJobExecutions), ctx, jobID)
+}
+
 // GetJobPlan mocks base method.
-func (m *MockClient) GetJobPlan(ctx context.Context, jobID string) (interface{}, error) {
+func (m *MockClient) GetJobPlan(ctx context.Context, jobID string) (*models.Planv1Plan, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetJobPlan", ctx, jobID)
-	ret0, _ := ret[0].(interface{})
+	ret0, _ := ret[0].(*models.Planv1Plan)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -126,18 +141,33 @@ func (mr *MockClientMockRecorder) GetJobPlan(ctx, jobID interface{}) *gomock.Cal
 }
 
 // GetJobs mocks base method.
-func (m *MockClient) GetJobs(ctx context.Context, typ, status string) ([]*models.AppRunnerJob, error) {
+func (m *MockClient) GetJobs(ctx context.Context, grp models.AppRunnerJobGroup, status models.AppRunnerJobStatus, limit *int64) ([]*models.AppRunnerJob, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetJobs", ctx, typ, status)
+	ret := m.ctrl.Call(m, "GetJobs", ctx, grp, status, limit)
 	ret0, _ := ret[0].([]*models.AppRunnerJob)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetJobs indicates an expected call of GetJobs.
-func (mr *MockClientMockRecorder) GetJobs(ctx, typ, status interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetJobs(ctx, grp, status, limit interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetJobs", reflect.TypeOf((*MockClient)(nil).GetJobs), ctx, typ, status)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetJobs", reflect.TypeOf((*MockClient)(nil).GetJobs), ctx, grp, status, limit)
+}
+
+// GetSettings mocks base method.
+func (m *MockClient) GetSettings(ctx context.Context) (*models.AppRunnerGroupSettings, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSettings", ctx)
+	ret0, _ := ret[0].(*models.AppRunnerGroupSettings)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSettings indicates an expected call of GetSettings.
+func (mr *MockClientMockRecorder) GetSettings(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSettings", reflect.TypeOf((*MockClient)(nil).GetSettings), ctx)
 }
 
 // SetRunnerID mocks base method.
@@ -153,15 +183,58 @@ func (mr *MockClientMockRecorder) SetRunnerID(runnerID interface{}) *gomock.Call
 }
 
 // UpdateJobExecution mocks base method.
-func (m *MockClient) UpdateJobExecution(ctx context.Context, jobExecutionID string, req *models.ServiceUpdateRunnerJobExecutionRequest) error {
+func (m *MockClient) UpdateJobExecution(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceUpdateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateJobExecution", ctx, jobExecutionID, req)
+	ret := m.ctrl.Call(m, "UpdateJobExecution", ctx, jobID, jobExecutionID, req)
+	ret0, _ := ret[0].(*models.AppRunnerJobExecution)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateJobExecution indicates an expected call of UpdateJobExecution.
+func (mr *MockClientMockRecorder) UpdateJobExecution(ctx, jobID, jobExecutionID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateJobExecution", reflect.TypeOf((*MockClient)(nil).UpdateJobExecution), ctx, jobID, jobExecutionID, req)
+}
+
+// WriteOTELLogs mocks base method.
+func (m *MockClient) WriteOTELLogs(ctx context.Context, req interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WriteOTELLogs", ctx, req)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// UpdateJobExecution indicates an expected call of UpdateJobExecution.
-func (mr *MockClientMockRecorder) UpdateJobExecution(ctx, jobExecutionID, req interface{}) *gomock.Call {
+// WriteOTELLogs indicates an expected call of WriteOTELLogs.
+func (mr *MockClientMockRecorder) WriteOTELLogs(ctx, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateJobExecution", reflect.TypeOf((*MockClient)(nil).UpdateJobExecution), ctx, jobExecutionID, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteOTELLogs", reflect.TypeOf((*MockClient)(nil).WriteOTELLogs), ctx, req)
+}
+
+// WriteOTELMetrics mocks base method.
+func (m *MockClient) WriteOTELMetrics(ctx context.Context, req interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WriteOTELMetrics", ctx, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// WriteOTELMetrics indicates an expected call of WriteOTELMetrics.
+func (mr *MockClientMockRecorder) WriteOTELMetrics(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteOTELMetrics", reflect.TypeOf((*MockClient)(nil).WriteOTELMetrics), ctx, req)
+}
+
+// WriteOTELTraces mocks base method.
+func (m *MockClient) WriteOTELTraces(ctx context.Context, req interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WriteOTELTraces", ctx, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// WriteOTELTraces indicates an expected call of WriteOTELTraces.
+func (mr *MockClientMockRecorder) WriteOTELTraces(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteOTELTraces", reflect.TypeOf((*MockClient)(nil).WriteOTELTraces), ctx, req)
 }

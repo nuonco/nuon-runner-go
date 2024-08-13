@@ -61,7 +61,7 @@ func (o *CreateRunnerJobExecutionHeartBeatReader) ReadResponse(response runtime.
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/runner-jobs/{runner_job_id}/heart-beats] CreateRunnerJobExecutionHeartBeat", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats] CreateRunnerJobExecutionHeartBeat", response, response.Code())
 	}
 }
 
@@ -111,12 +111,12 @@ func (o *CreateRunnerJobExecutionHeartBeatOK) Code() int {
 
 func (o *CreateRunnerJobExecutionHeartBeatOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatOK %s", 200, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatOK %s", 200, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatOK) GetPayload() *models.AppRunnerJobExecutionHeartBeat {
@@ -181,12 +181,12 @@ func (o *CreateRunnerJobExecutionHeartBeatBadRequest) Code() int {
 
 func (o *CreateRunnerJobExecutionHeartBeatBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatBadRequest %s", 400, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatBadRequest %s", 400, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatBadRequest) GetPayload() *models.StderrErrResponse {
@@ -251,12 +251,12 @@ func (o *CreateRunnerJobExecutionHeartBeatUnauthorized) Code() int {
 
 func (o *CreateRunnerJobExecutionHeartBeatUnauthorized) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatUnauthorized %s", 401, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatUnauthorized) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatUnauthorized %s", 401, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -321,12 +321,12 @@ func (o *CreateRunnerJobExecutionHeartBeatForbidden) Code() int {
 
 func (o *CreateRunnerJobExecutionHeartBeatForbidden) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatForbidden %s", 403, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatForbidden) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatForbidden %s", 403, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatForbidden) GetPayload() *models.StderrErrResponse {
@@ -391,12 +391,12 @@ func (o *CreateRunnerJobExecutionHeartBeatNotFound) Code() int {
 
 func (o *CreateRunnerJobExecutionHeartBeatNotFound) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatNotFound %s", 404, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatNotFound) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatNotFound %s", 404, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatNotFound) GetPayload() *models.StderrErrResponse {
@@ -461,12 +461,12 @@ func (o *CreateRunnerJobExecutionHeartBeatInternalServerError) Code() int {
 
 func (o *CreateRunnerJobExecutionHeartBeatInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatInternalServerError %s", 500, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runner-job/{runner_job_id}/executions/{runner_job_execution_id}/heart-beats][%d] createRunnerJobExecutionHeartBeatInternalServerError %s", 500, payload)
 }
 
 func (o *CreateRunnerJobExecutionHeartBeatInternalServerError) GetPayload() *models.StderrErrResponse {

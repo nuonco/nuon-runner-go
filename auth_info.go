@@ -5,7 +5,7 @@ import (
 	runtimeclient "github.com/go-openapi/runtime/client"
 )
 
-func (c *client) getOrgIDAuthInfo() runtime.ClientAuthInfoWriter {
+func (c *client) getAuthInfo() runtime.ClientAuthInfoWriter {
 	return runtimeclient.Compose(
 		c.getApiKeyAuthInfo(),
 	)

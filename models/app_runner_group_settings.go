@@ -42,6 +42,9 @@ type AppRunnerGroupSettings struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// otel collector config
+	OtelCollectorConfig string `json:"otel_collector_config,omitempty"`
+
 	// runner group id
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
