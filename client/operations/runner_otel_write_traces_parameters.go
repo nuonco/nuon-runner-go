@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/nuonco/nuon-runner-go/models"
 )
 
 // NewRunnerOtelWriteTracesParams creates a new RunnerOtelWriteTracesParams object,
@@ -65,7 +67,7 @@ type RunnerOtelWriteTracesParams struct {
 
 	   Input
 	*/
-	Req interface{}
+	Req *models.ServiceOTLPTraceExportRequest
 
 	/* RunnerID.
 
@@ -127,13 +129,13 @@ func (o *RunnerOtelWriteTracesParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithReq adds the req to the runner otel write traces params
-func (o *RunnerOtelWriteTracesParams) WithReq(req interface{}) *RunnerOtelWriteTracesParams {
+func (o *RunnerOtelWriteTracesParams) WithReq(req *models.ServiceOTLPTraceExportRequest) *RunnerOtelWriteTracesParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the runner otel write traces params
-func (o *RunnerOtelWriteTracesParams) SetReq(req interface{}) {
+func (o *RunnerOtelWriteTracesParams) SetReq(req *models.ServiceOTLPTraceExportRequest) {
 	o.Req = req
 }
 

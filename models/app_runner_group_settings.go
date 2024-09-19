@@ -18,6 +18,12 @@ import (
 // swagger:model app.RunnerGroupSettings
 type AppRunnerGroupSettings struct {
 
+	// container image tag
+	ContainerImageTag string `json:"container_image_tag,omitempty"`
+
+	// configuration for deploying the runner
+	ContainerImageURL string `json:"container_image_url,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -27,17 +33,11 @@ type AppRunnerGroupSettings struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// health check timeout
-	HealthCheckTimeout int64 `json:"health_check_timeout,omitempty"`
-
-	// Various settings for the runner group
+	// Various settings for the runner to handle internally
 	HeartBeatTimeout int64 `json:"heart_beat_timeout,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
-
-	// job execution heart beat timeout
-	JobExecutionHeartBeatTimeout int64 `json:"job_execution_heart_beat_timeout,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
@@ -45,8 +45,14 @@ type AppRunnerGroupSettings struct {
 	// otel collector config
 	OtelCollectorConfig string `json:"otel_collector_config,omitempty"`
 
+	// runner api url
+	RunnerAPIURL string `json:"runner_api_url,omitempty"`
+
 	// runner group id
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
+
+	// settings refresh timeout
+	SettingsRefreshTimeout TimeDuration `json:"settings_refresh_timeout,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -57,6 +63,10 @@ func (m *AppRunnerGroupSettings) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSettingsRefreshTimeout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,11 +95,32 @@ func (m *AppRunnerGroupSettings) validateCreatedBy(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *AppRunnerGroupSettings) validateSettingsRefreshTimeout(formats strfmt.Registry) error {
+	if swag.IsZero(m.SettingsRefreshTimeout) { // not required
+		return nil
+	}
+
+	if err := m.SettingsRefreshTimeout.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("settings_refresh_timeout")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("settings_refresh_timeout")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app runner group settings based on the context it is used
 func (m *AppRunnerGroupSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSettingsRefreshTimeout(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -115,6 +146,24 @@ func (m *AppRunnerGroupSettings) contextValidateCreatedBy(ctx context.Context, f
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppRunnerGroupSettings) contextValidateSettingsRefreshTimeout(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SettingsRefreshTimeout) { // not required
+		return nil
+	}
+
+	if err := m.SettingsRefreshTimeout.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("settings_refresh_timeout")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("settings_refresh_timeout")
+		}
+		return err
 	}
 
 	return nil

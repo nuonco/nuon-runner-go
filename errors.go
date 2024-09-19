@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nuonco/nuon-go/models"
+	"github.com/nuonco/nuon-runner-go/models"
 )
 
 type statusErr struct {

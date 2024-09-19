@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateRunnerHeartBeatCreated) Code() int {
 }
 
 func (o *CreateRunnerHeartBeatCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatCreated) GetPayload() *models.AppRunnerHeartBeat {
@@ -180,13 +177,11 @@ func (o *CreateRunnerHeartBeatBadRequest) Code() int {
 }
 
 func (o *CreateRunnerHeartBeatBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateRunnerHeartBeatUnauthorized) Code() int {
 }
 
 func (o *CreateRunnerHeartBeatUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateRunnerHeartBeatForbidden) Code() int {
 }
 
 func (o *CreateRunnerHeartBeatForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateRunnerHeartBeatNotFound) Code() int {
 }
 
 func (o *CreateRunnerHeartBeatNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateRunnerHeartBeatInternalServerError) Code() int {
 }
 
 func (o *CreateRunnerHeartBeatInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/heart-beats][%d] createRunnerHeartBeatInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateRunnerHeartBeatInternalServerError) GetPayload() *models.StderrErrResponse {

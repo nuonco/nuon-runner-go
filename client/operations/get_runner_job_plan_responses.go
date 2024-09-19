@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -76,7 +75,7 @@ GetRunnerJobPlanOK describes a response with status code 200, with default heade
 OK
 */
 type GetRunnerJobPlanOK struct {
-	Payload *models.Planv1Plan
+	Payload interface{}
 }
 
 // IsSuccess returns true when this get runner job plan o k response has a 2xx status code
@@ -110,25 +109,21 @@ func (o *GetRunnerJobPlanOK) Code() int {
 }
 
 func (o *GetRunnerJobPlanOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanOK  %+v", 200, o.Payload)
 }
 
 func (o *GetRunnerJobPlanOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanOK  %+v", 200, o.Payload)
 }
 
-func (o *GetRunnerJobPlanOK) GetPayload() *models.Planv1Plan {
+func (o *GetRunnerJobPlanOK) GetPayload() interface{} {
 	return o.Payload
 }
 
 func (o *GetRunnerJobPlanOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Planv1Plan)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -180,13 +175,11 @@ func (o *GetRunnerJobPlanBadRequest) Code() int {
 }
 
 func (o *GetRunnerJobPlanBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetRunnerJobPlanBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetRunnerJobPlanBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +243,11 @@ func (o *GetRunnerJobPlanUnauthorized) Code() int {
 }
 
 func (o *GetRunnerJobPlanUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetRunnerJobPlanUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetRunnerJobPlanUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +311,11 @@ func (o *GetRunnerJobPlanForbidden) Code() int {
 }
 
 func (o *GetRunnerJobPlanForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetRunnerJobPlanForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetRunnerJobPlanForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +379,11 @@ func (o *GetRunnerJobPlanNotFound) Code() int {
 }
 
 func (o *GetRunnerJobPlanNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetRunnerJobPlanNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetRunnerJobPlanNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +447,11 @@ func (o *GetRunnerJobPlanInternalServerError) Code() int {
 }
 
 func (o *GetRunnerJobPlanInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetRunnerJobPlanInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/plan][%d] getRunnerJobPlanInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetRunnerJobPlanInternalServerError) GetPayload() *models.StderrErrResponse {

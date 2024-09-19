@@ -41,6 +41,12 @@ const (
 
 	// AppRunnerJobOperationTypePlanDashOnly captures enum value "plan-only"
 	AppRunnerJobOperationTypePlanDashOnly AppRunnerJobOperationType = "plan-only"
+
+	// AppRunnerJobOperationTypeBuild captures enum value "build"
+	AppRunnerJobOperationTypeBuild AppRunnerJobOperationType = "build"
+
+	// AppRunnerJobOperationTypeUnknown captures enum value "unknown"
+	AppRunnerJobOperationTypeUnknown AppRunnerJobOperationType = "unknown"
 )
 
 // for schema
@@ -48,7 +54,7 @@ var appRunnerJobOperationTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobOperationType
-	if err := json.Unmarshal([]byte(`["exec","apply","destroy","plan-only"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["exec","apply","destroy","plan-only","build","unknown"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

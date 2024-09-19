@@ -37,7 +37,7 @@ func (c *client) GetJob(ctx context.Context, jobID string) (*models.AppRunnerJob
 	return resp.Payload, nil
 }
 
-func (c *client) GetJobPlan(ctx context.Context, jobID string) (*models.Planv1Plan, error) {
+func (c *client) GetJobPlan(ctx context.Context, jobID string) (interface{}, error) {
 	resp, err := c.genClient.Operations.GetRunnerJobPlan(&operations.GetRunnerJobPlanParams{
 		RunnerJobID: jobID,
 		Context:     ctx,

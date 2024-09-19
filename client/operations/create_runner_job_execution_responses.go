@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateRunnerJobExecutionCreated) Code() int {
 }
 
 func (o *CreateRunnerJobExecutionCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionCreated) GetPayload() *models.AppRunnerJobExecution {
@@ -180,13 +177,11 @@ func (o *CreateRunnerJobExecutionBadRequest) Code() int {
 }
 
 func (o *CreateRunnerJobExecutionBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateRunnerJobExecutionUnauthorized) Code() int {
 }
 
 func (o *CreateRunnerJobExecutionUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateRunnerJobExecutionForbidden) Code() int {
 }
 
 func (o *CreateRunnerJobExecutionForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateRunnerJobExecutionNotFound) Code() int {
 }
 
 func (o *CreateRunnerJobExecutionNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateRunnerJobExecutionInternalServerError) Code() int {
 }
 
 func (o *CreateRunnerJobExecutionInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runner-jobs/{runner_job_id}/executions][%d] createRunnerJobExecutionInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateRunnerJobExecutionInternalServerError) GetPayload() *models.StderrErrResponse {
