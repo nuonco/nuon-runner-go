@@ -37,13 +37,13 @@ func (c *client) GetJob(ctx context.Context, jobID string) (*models.AppRunnerJob
 	return resp.Payload, nil
 }
 
-func (c *client) GetJobPlan(ctx context.Context, jobID string) (*models.Planv1Plan, error) {
+func (c *client) GetJobPlanJSON(ctx context.Context, jobID string) (string, error) {
 	resp, err := c.genClient.Operations.GetRunnerJobPlan(&operations.GetRunnerJobPlanParams{
 		RunnerJobID: jobID,
 		Context:     ctx,
 	}, c.getAuthInfo())
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
 	return resp.Payload, nil
