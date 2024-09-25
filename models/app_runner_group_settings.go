@@ -52,7 +52,7 @@ type AppRunnerGroupSettings struct {
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
 	// settings refresh timeout
-	SettingsRefreshTimeout TimeDuration `json:"settings_refresh_timeout,omitempty"`
+	SettingsRefreshTimeout int64 `json:"settings_refresh_timeout,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -63,10 +63,6 @@ func (m *AppRunnerGroupSettings) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSettingsRefreshTimeout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -95,32 +91,11 @@ func (m *AppRunnerGroupSettings) validateCreatedBy(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *AppRunnerGroupSettings) validateSettingsRefreshTimeout(formats strfmt.Registry) error {
-	if swag.IsZero(m.SettingsRefreshTimeout) { // not required
-		return nil
-	}
-
-	if err := m.SettingsRefreshTimeout.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("settings_refresh_timeout")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("settings_refresh_timeout")
-		}
-		return err
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app runner group settings based on the context it is used
 func (m *AppRunnerGroupSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateSettingsRefreshTimeout(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,24 +121,6 @@ func (m *AppRunnerGroupSettings) contextValidateCreatedBy(ctx context.Context, f
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *AppRunnerGroupSettings) contextValidateSettingsRefreshTimeout(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.SettingsRefreshTimeout) { // not required
-		return nil
-	}
-
-	if err := m.SettingsRefreshTimeout.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("settings_refresh_timeout")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("settings_refresh_timeout")
-		}
-		return err
 	}
 
 	return nil

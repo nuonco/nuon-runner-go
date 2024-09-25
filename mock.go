@@ -126,10 +126,10 @@ func (mr *MockClientMockRecorder) GetJobExecutions(ctx, jobID interface{}) *gomo
 }
 
 // GetJobPlan mocks base method.
-func (m *MockClient) GetJobPlan(ctx context.Context, jobID string) (*models.Planv1Plan, error) {
+func (m *MockClient) GetJobPlan(ctx context.Context, jobID string) (interface{}, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetJobPlan", ctx, jobID)
-	ret0, _ := ret[0].(*models.Planv1Plan)
+	ret0, _ := ret[0].(interface{})
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
