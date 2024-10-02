@@ -125,19 +125,19 @@ func (mr *MockClientMockRecorder) GetJobExecutions(ctx, jobID interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetJobExecutions", reflect.TypeOf((*MockClient)(nil).GetJobExecutions), ctx, jobID)
 }
 
-// GetJobPlan mocks base method.
-func (m *MockClient) GetJobPlan(ctx context.Context, jobID string) (interface{}, error) {
+// GetJobPlanJSON mocks base method.
+func (m *MockClient) GetJobPlanJSON(ctx context.Context, jobID string) (string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetJobPlan", ctx, jobID)
-	ret0, _ := ret[0].(interface{})
+	ret := m.ctrl.Call(m, "GetJobPlanJSON", ctx, jobID)
+	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetJobPlan indicates an expected call of GetJobPlan.
-func (mr *MockClientMockRecorder) GetJobPlan(ctx, jobID interface{}) *gomock.Call {
+// GetJobPlanJSON indicates an expected call of GetJobPlanJSON.
+func (mr *MockClientMockRecorder) GetJobPlanJSON(ctx, jobID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetJobPlan", reflect.TypeOf((*MockClient)(nil).GetJobPlan), ctx, jobID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetJobPlanJSON", reflect.TypeOf((*MockClient)(nil).GetJobPlanJSON), ctx, jobID)
 }
 
 // GetJobs mocks base method.
