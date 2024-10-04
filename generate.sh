@@ -4,7 +4,7 @@ set -e
 set -o pipefail
 set -u
 
-env=${NUON_ENV:-prod}
+env=${NUON_ENV:-dev}
 echo >&2 "using $env, please set NUON_ENV to use a different environment."
 
 case $env in
