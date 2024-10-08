@@ -4,18 +4,18 @@ set -e
 set -o pipefail
 set -u
 
-env=${NUON_ENV:-prod}
+env=${NUON_ENV:-dev}
 echo >&2 "using $env, please set NUON_ENV to use a different environment."
 
 case $env in
   stage)
-    url="https://runner.stage.nuon.co/oapi/v3"
+    url="https://runner.stage.nuon.co/docs/doc.json"
     ;;
   prod)
-    url="https://runner.nuon.co/oapi/v3"
+    url="https://runner.nuon.co/docs/doc.json"
     ;;
   dev)
-    url="http://localhost:8083/oapi/v3"
+    url="http://localhost:8083/docs/doc.json"
     ;;
   *)
     echo "invalid env $env"

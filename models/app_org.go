@@ -28,9 +28,6 @@ type AppOrg struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// custom cert
-	CustomCert bool `json:"custom_cert,omitempty"`
-
 	// health checks
 	HealthChecks []*AppOrgHealthCheck `json:"health_checks"`
 
