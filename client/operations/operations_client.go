@@ -64,6 +64,8 @@ type ClientService interface {
 
 	CreateRunnerJobExecutionResult(params *CreateRunnerJobExecutionResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionResultCreated, error)
 
+	GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error)
+
 	GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error)
 
 	GetRunnerJobExecutions(params *GetRunnerJobExecutionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionsOK, error)
@@ -246,6 +248,47 @@ func (a *Client) CreateRunnerJobExecutionResult(params *CreateRunnerJobExecution
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateRunnerJobExecutionResult: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetRunner gets a runner
+
+Return a runner.
+*/
+func (a *Client) GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunner",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/{runner_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -461,6 +504,8 @@ func (a *Client) GetRunnerSettings(params *GetRunnerSettingsParams, authInfo run
 
 custom, runner otel collector/exporter stack. The inbound data schema is the
 schema defined by the spec. We use the official otel go SDK for this.
+
+This endpoint accepts a protobuff.
 */
 func (a *Client) RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsCreated, error) {
 	// TODO: Validate the params before sending
