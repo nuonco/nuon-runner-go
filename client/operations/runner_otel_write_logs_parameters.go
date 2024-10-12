@@ -67,7 +67,7 @@ type RunnerOtelWriteLogsParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceOTLPLogExportRequest
+	Req *models.OtelOTLPLogExportRequest
 
 	/* RunnerID.
 
@@ -129,13 +129,13 @@ func (o *RunnerOtelWriteLogsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithReq adds the req to the runner otel write logs params
-func (o *RunnerOtelWriteLogsParams) WithReq(req *models.ServiceOTLPLogExportRequest) *RunnerOtelWriteLogsParams {
+func (o *RunnerOtelWriteLogsParams) WithReq(req *models.OtelOTLPLogExportRequest) *RunnerOtelWriteLogsParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the runner otel write logs params
-func (o *RunnerOtelWriteLogsParams) SetReq(req *models.ServiceOTLPLogExportRequest) {
+func (o *RunnerOtelWriteLogsParams) SetReq(req *models.OtelOTLPLogExportRequest) {
 	o.Req = req
 }
 

@@ -505,7 +505,7 @@ func (a *Client) GetRunnerSettings(params *GetRunnerSettingsParams, authInfo run
 custom, runner otel collector/exporter stack. The inbound data schema is the
 schema defined by the spec. We use the official otel go SDK for this.
 
-This endpoint accepts a protobuff.
+This endpoint accepts protobuffs, but not JSON.
 */
 func (a *Client) RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsCreated, error) {
 	// TODO: Validate the params before sending

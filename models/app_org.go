@@ -39,14 +39,19 @@ type AppOrg struct {
 		AppOrgHealthCheck
 	} `json:"latest_health_check,omitempty"`
 
+	// logo url
+	LogoURL string `json:"logo_url,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
 	// notifications config
 	NotificationsConfig *AppNotificationsConfig `json:"notifications_config,omitempty"`
 
-	// These fields are used to control the behaviour of the org
-	// NOTE: these are starting as nullable, so we can update stage/prod before resetting locally.
+	// runner group
+	RunnerGroup *AppRunnerGroup `json:"runner_group,omitempty"`
+
+	// sandbox mode
 	SandboxMode bool `json:"sandbox_mode,omitempty"`
 
 	// status
@@ -79,6 +84,10 @@ func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNotificationsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerGroup(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -164,6 +173,25 @@ func (m *AppOrg) validateNotificationsConfig(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppOrg) validateRunnerGroup(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerGroup) { // not required
+		return nil
+	}
+
+	if m.RunnerGroup != nil {
+		if err := m.RunnerGroup.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_group")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppOrg) validateVcsConnections(formats strfmt.Registry) error {
 	if swag.IsZero(m.VcsConnections) { // not required
 		return nil
@@ -207,6 +235,10 @@ func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidateNotificationsConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerGroup(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -284,6 +316,27 @@ func (m *AppOrg) contextValidateNotificationsConfig(ctx context.Context, formats
 				return ve.ValidateName("notifications_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("notifications_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppOrg) contextValidateRunnerGroup(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RunnerGroup != nil {
+
+		if swag.IsZero(m.RunnerGroup) { // not required
+			return nil
+		}
+
+		if err := m.RunnerGroup.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_group")
 			}
 			return err
 		}
