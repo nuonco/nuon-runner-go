@@ -58,6 +58,9 @@ type AppRunnerJob struct {
 	// overall timeout is how long a job can be attempted, before being cancelled
 	OverallTimeout int64 `json:"overall_timeout,omitempty"`
 
+	// This is a temporary field until the log-stream is shipped with nuon actions
+	OverrideLogJobID string `json:"override_log_job_id,omitempty"`
+
 	// owner id
 	OwnerID string `json:"owner_id,omitempty"`
 
