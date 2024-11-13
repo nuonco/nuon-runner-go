@@ -76,6 +76,8 @@ type ClientService interface {
 
 	GetRunnerSettings(params *GetRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerSettingsOK, error)
 
+	LogStreamWriteLogs(params *LogStreamWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogStreamWriteLogsCreated, error)
+
 	RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsCreated, error)
 
 	RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteMetricsCreated, error)
@@ -494,6 +496,47 @@ func (a *Client) GetRunnerSettings(params *GetRunnerSettingsParams, authInfo run
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerSettings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LogStreamWriteLogs logs stream write logs
+
+Write logs to a log stream. Can be used as an OTEL exporter endpoint.
+*/
+func (a *Client) LogStreamWriteLogs(params *LogStreamWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogStreamWriteLogsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLogStreamWriteLogsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "LogStreamWriteLogs",
+		Method:             "POST",
+		PathPattern:        "/v1/log-streams/{log_stream_id}/logs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LogStreamWriteLogsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LogStreamWriteLogsCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for LogStreamWriteLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

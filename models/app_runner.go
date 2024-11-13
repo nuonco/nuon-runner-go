@@ -46,8 +46,8 @@ type AppRunner struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
-	// runner id
-	RunnerID string `json:"runner_id,omitempty"`
+	// runner group id
+	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
 	// runner job
 	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
