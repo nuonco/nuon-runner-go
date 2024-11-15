@@ -34,6 +34,9 @@ type AppRunnerHeartBeat struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// version
+	Version string `json:"version,omitempty"`
 }
 
 // Validate validates this app runner heart beat
