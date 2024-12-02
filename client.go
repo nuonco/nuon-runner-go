@@ -24,6 +24,9 @@ type Client interface {
 	CreateHeartBeat(ctx context.Context, req *models.ServiceCreateRunnerHeartBeatRequest) (*models.AppRunnerHeartBeat, error)
 	CreateHealthCheck(ctx context.Context, req *models.ServiceCreateRunnerHealthCheckRequest) (*models.AppRunnerHealthCheck, error)
 
+	// internal metrics
+	PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error
+
 	// jobs
 	GetJobs(ctx context.Context, grp models.AppRunnerJobGroup, status models.AppRunnerJobStatus, limit *int64) ([]*models.AppRunnerJob, error)
 	GetJob(ctx context.Context, jobID string) (*models.AppRunnerJob, error)
