@@ -24,6 +24,9 @@ type ServicePublishMetricInput struct {
 	// event
 	Event *MetricsEvent `json:"event,omitempty"`
 
+	// gauge
+	Gauge *GithubComPowertoolsdevMonoPkgMetricsGauge `json:"gauge,omitempty"`
+
 	// incr
 	Incr *MetricsIncr `json:"incr,omitempty"`
 
@@ -40,6 +43,10 @@ func (m *ServicePublishMetricInput) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEvent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGauge(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -87,6 +94,25 @@ func (m *ServicePublishMetricInput) validateEvent(formats strfmt.Registry) error
 				return ve.ValidateName("event")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("event")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServicePublishMetricInput) validateGauge(formats strfmt.Registry) error {
+	if swag.IsZero(m.Gauge) { // not required
+		return nil
+	}
+
+	if m.Gauge != nil {
+		if err := m.Gauge.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gauge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gauge")
 			}
 			return err
 		}
@@ -145,6 +171,10 @@ func (m *ServicePublishMetricInput) ContextValidate(ctx context.Context, formats
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGauge(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateIncr(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -193,6 +223,27 @@ func (m *ServicePublishMetricInput) contextValidateEvent(ctx context.Context, fo
 				return ve.ValidateName("event")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("event")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServicePublishMetricInput) contextValidateGauge(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Gauge != nil {
+
+		if swag.IsZero(m.Gauge) { // not required
+			return nil
+		}
+
+		if err := m.Gauge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gauge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gauge")
 			}
 			return err
 		}

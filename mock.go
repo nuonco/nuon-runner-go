@@ -170,6 +170,20 @@ func (mr *MockClientMockRecorder) GetSettings(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSettings", reflect.TypeOf((*MockClient)(nil).GetSettings), ctx)
 }
 
+// PublishMetrics mocks base method.
+func (m *MockClient) PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PublishMetrics", ctx, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// PublishMetrics indicates an expected call of PublishMetrics.
+func (mr *MockClientMockRecorder) PublishMetrics(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublishMetrics", reflect.TypeOf((*MockClient)(nil).PublishMetrics), ctx, req)
+}
+
 // SetRunnerID mocks base method.
 func (m *MockClient) SetRunnerID(runnerID string) {
 	m.ctrl.T.Helper()
