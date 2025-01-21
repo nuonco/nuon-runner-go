@@ -30,7 +30,7 @@ type AppRunnerJobExecutionOutputs struct {
 	OrgID string `json:"org_id,omitempty"`
 
 	// outputs
-	Outputs map[string]string `json:"outputs,omitempty"`
+	Outputs map[string]interface{} `json:"outputs,omitempty"`
 
 	// runner job execution id
 	RunnerJobExecutionID string `json:"runner_job_execution_id,omitempty"`

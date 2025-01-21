@@ -80,6 +80,21 @@ func (mr *MockClientMockRecorder) CreateJobExecution(ctx, jobID, req interface{}
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateJobExecution", reflect.TypeOf((*MockClient)(nil).CreateJobExecution), ctx, jobID, req)
 }
 
+// CreateJobExecutionOutputs mocks base method.
+func (m *MockClient) CreateJobExecutionOutputs(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceCreateRunnerJobExecutionOutputsRequest) (*models.AppRunnerJobExecutionOutputs, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateJobExecutionOutputs", ctx, jobID, jobExecutionID, req)
+	ret0, _ := ret[0].(*models.AppRunnerJobExecutionOutputs)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateJobExecutionOutputs indicates an expected call of CreateJobExecutionOutputs.
+func (mr *MockClientMockRecorder) CreateJobExecutionOutputs(ctx, jobID, jobExecutionID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateJobExecutionOutputs", reflect.TypeOf((*MockClient)(nil).CreateJobExecutionOutputs), ctx, jobID, jobExecutionID, req)
+}
+
 // CreateJobExecutionResult mocks base method.
 func (m *MockClient) CreateJobExecutionResult(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceCreateRunnerJobExecutionResultRequest) (*models.AppRunnerJobExecutionResult, error) {
 	m.ctrl.T.Helper()
