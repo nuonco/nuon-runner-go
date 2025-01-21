@@ -59,3 +59,17 @@ func (c *client) CreateJobExecutionResult(ctx context.Context, jobID, jobExecuti
 
 	return resp.Payload, nil
 }
+
+func (c *client) CreateJobExecutionOutputs(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceCreateRunnerJobExecutionOutputsRequest) (*models.AppRunnerJobExecutionOutputs, error) {
+	resp, err := c.genClient.Operations.CreateRunnerJobExecutionOutputs(&operations.CreateRunnerJobExecutionOutputsParams{
+		Req:                  req,
+		RunnerJobExecutionID: jobExecutionID,
+		RunnerJobID:          jobID,
+		Context:              ctx,
+	}, c.getAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}

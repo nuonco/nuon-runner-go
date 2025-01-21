@@ -62,6 +62,8 @@ type ClientService interface {
 
 	CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionCreated, error)
 
+	CreateRunnerJobExecutionOutputs(params *CreateRunnerJobExecutionOutputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionOutputsCreated, error)
+
 	CreateRunnerJobExecutionResult(params *CreateRunnerJobExecutionResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionResultCreated, error)
 
 	GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error)
@@ -211,6 +213,49 @@ func (a *Client) CreateRunnerJobExecution(params *CreateRunnerJobExecutionParams
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateRunnerJobExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	CreateRunnerJobExecutionOutputs creates a runner job execution outputs
+
+	Write outputs for a runner job execution. This endpoint accepts _any_ JSON, and relies on validation happening in the
+
+runner job before writing.
+*/
+func (a *Client) CreateRunnerJobExecutionOutputs(params *CreateRunnerJobExecutionOutputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionOutputsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateRunnerJobExecutionOutputsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateRunnerJobExecutionOutputs",
+		Method:             "POST",
+		PathPattern:        "/v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}/outputs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateRunnerJobExecutionOutputsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateRunnerJobExecutionOutputsCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateRunnerJobExecutionOutputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
