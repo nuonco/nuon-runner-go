@@ -32,6 +32,9 @@ type AppRunnerHeartBeat struct {
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 
+	// started at
+	StartedAt string `json:"started_at,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
