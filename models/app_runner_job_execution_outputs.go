@@ -32,6 +32,9 @@ type AppRunnerJobExecutionOutputs struct {
 	// outputs
 	Outputs map[string]interface{} `json:"outputs,omitempty"`
 
+	// outputs json
+	OutputsJSON string `json:"outputs_json,omitempty"`
+
 	// runner job execution id
 	RunnerJobExecutionID string `json:"runner_job_execution_id,omitempty"`
 

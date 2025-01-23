@@ -40,6 +40,9 @@ type Client interface {
 	WriteOTELLogs(ctx context.Context, req interface{}) error
 	WriteOTELTraces(ctx context.Context, req interface{}) error
 	WriteOTELMetrics(ctx context.Context, req interface{}) error
+
+	// actions specific endpoints
+	UpdateInstallActionWorkflowRunStep(ctx context.Context, installID, workflowID, runID string, req *models.ServiceUpdateInstallActionWorkflowRunStepRequest) *models.InstallActionWorkflowRunStep
 }
 
 var _ Client = (*client)(nil)
