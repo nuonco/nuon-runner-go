@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/nuonco/nuon-runner-go/models"
 )
 
 // NewUpdateInstallActionWorkflowRunStepParams creates a new UpdateInstallActionWorkflowRunStepParams object,
@@ -66,6 +68,12 @@ type UpdateInstallActionWorkflowRunStepParams struct {
 	   install ID
 	*/
 	InstallID string
+
+	/* Req.
+
+	   Input
+	*/
+	Req *models.ServiceUpdateInstallActionWorkflowRunStepRequest
 
 	/* StepID.
 
@@ -143,6 +151,17 @@ func (o *UpdateInstallActionWorkflowRunStepParams) SetInstallID(installID string
 	o.InstallID = installID
 }
 
+// WithReq adds the req to the update install action workflow run step params
+func (o *UpdateInstallActionWorkflowRunStepParams) WithReq(req *models.ServiceUpdateInstallActionWorkflowRunStepRequest) *UpdateInstallActionWorkflowRunStepParams {
+	o.SetReq(req)
+	return o
+}
+
+// SetReq adds the req to the update install action workflow run step params
+func (o *UpdateInstallActionWorkflowRunStepParams) SetReq(req *models.ServiceUpdateInstallActionWorkflowRunStepRequest) {
+	o.Req = req
+}
+
 // WithStepID adds the stepID to the update install action workflow run step params
 func (o *UpdateInstallActionWorkflowRunStepParams) WithStepID(stepID string) *UpdateInstallActionWorkflowRunStepParams {
 	o.SetStepID(stepID)
@@ -176,6 +195,11 @@ func (o *UpdateInstallActionWorkflowRunStepParams) WriteToRequest(r runtime.Clie
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {
 		return err
+	}
+	if o.Req != nil {
+		if err := r.SetBodyParam(o.Req); err != nil {
+			return err
+		}
 	}
 
 	// path param step_id
