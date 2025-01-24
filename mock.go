@@ -110,6 +110,51 @@ func (mr *MockClientMockRecorder) CreateJobExecutionResult(ctx, jobID, jobExecut
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateJobExecutionResult", reflect.TypeOf((*MockClient)(nil).CreateJobExecutionResult), ctx, jobID, jobExecutionID, req)
 }
 
+// GetActionWorkflowConfig mocks base method.
+func (m *MockClient) GetActionWorkflowConfig(ctx context.Context, workflowConfigID string) (*models.AppActionWorkflowConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetActionWorkflowConfig", ctx, workflowConfigID)
+	ret0, _ := ret[0].(*models.AppActionWorkflowConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetActionWorkflowConfig indicates an expected call of GetActionWorkflowConfig.
+func (mr *MockClientMockRecorder) GetActionWorkflowConfig(ctx, workflowConfigID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetActionWorkflowConfig", reflect.TypeOf((*MockClient)(nil).GetActionWorkflowConfig), ctx, workflowConfigID)
+}
+
+// GetActionWorkflowLatestConfig mocks base method.
+func (m *MockClient) GetActionWorkflowLatestConfig(ctx context.Context, workflowID string) (*models.AppActionWorkflowConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetActionWorkflowLatestConfig", ctx, workflowID)
+	ret0, _ := ret[0].(*models.AppActionWorkflowConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetActionWorkflowLatestConfig indicates an expected call of GetActionWorkflowLatestConfig.
+func (mr *MockClientMockRecorder) GetActionWorkflowLatestConfig(ctx, workflowID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetActionWorkflowLatestConfig", reflect.TypeOf((*MockClient)(nil).GetActionWorkflowLatestConfig), ctx, workflowID)
+}
+
+// GetInstallActionWorkflowRun mocks base method.
+func (m *MockClient) GetInstallActionWorkflowRun(ctx context.Context, installID, runID string) (*models.AppInstallActionWorkflowRun, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallActionWorkflowRun", ctx, installID, runID)
+	ret0, _ := ret[0].(*models.AppInstallActionWorkflowRun)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallActionWorkflowRun indicates an expected call of GetInstallActionWorkflowRun.
+func (mr *MockClientMockRecorder) GetInstallActionWorkflowRun(ctx, installID, runID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallActionWorkflowRun", reflect.TypeOf((*MockClient)(nil).GetInstallActionWorkflowRun), ctx, installID, runID)
+}
+
 // GetJob mocks base method.
 func (m *MockClient) GetJob(ctx context.Context, jobID string) (*models.AppRunnerJob, error) {
 	m.ctrl.T.Helper()
@@ -195,6 +240,21 @@ func (m *MockClient) SetRunnerID(runnerID string) {
 func (mr *MockClientMockRecorder) SetRunnerID(runnerID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetRunnerID", reflect.TypeOf((*MockClient)(nil).SetRunnerID), runnerID)
+}
+
+// UpdateInstallActionWorkflowRunStep mocks base method.
+func (m *MockClient) UpdateInstallActionWorkflowRunStep(ctx context.Context, installID, workflowID, runID string, req *models.ServiceUpdateInstallActionWorkflowRunStepRequest) (*models.AppInstallActionWorkflowRunStep, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateInstallActionWorkflowRunStep", ctx, installID, workflowID, runID, req)
+	ret0, _ := ret[0].(*models.AppInstallActionWorkflowRunStep)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateInstallActionWorkflowRunStep indicates an expected call of UpdateInstallActionWorkflowRunStep.
+func (mr *MockClientMockRecorder) UpdateInstallActionWorkflowRunStep(ctx, installID, workflowID, runID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstallActionWorkflowRunStep", reflect.TypeOf((*MockClient)(nil).UpdateInstallActionWorkflowRunStep), ctx, installID, workflowID, runID, req)
 }
 
 // UpdateJobExecution mocks base method.
