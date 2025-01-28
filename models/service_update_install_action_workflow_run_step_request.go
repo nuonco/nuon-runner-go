@@ -18,6 +18,9 @@ import (
 // swagger:model service.UpdateInstallActionWorkflowRunStepRequest
 type ServiceUpdateInstallActionWorkflowRunStepRequest struct {
 
+	// execution duration
+	ExecutionDuration int64 `json:"execution_duration,omitempty"`
+
 	// status
 	Status AppInstallActionWorkflowRunStepStatus `json:"status,omitempty"`
 }
