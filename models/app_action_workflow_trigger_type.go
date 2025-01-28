@@ -36,8 +36,17 @@ const (
 	// AppActionWorkflowTriggerTypeCron captures enum value "cron"
 	AppActionWorkflowTriggerTypeCron AppActionWorkflowTriggerType = "cron"
 
-	// AppActionWorkflowTriggerTypePostInstall captures enum value "post_install"
-	AppActionWorkflowTriggerTypePostInstall AppActionWorkflowTriggerType = "post_install"
+	// AppActionWorkflowTriggerTypePreSandboxRun captures enum value "pre_sandbox_run"
+	AppActionWorkflowTriggerTypePreSandboxRun AppActionWorkflowTriggerType = "pre_sandbox_run"
+
+	// AppActionWorkflowTriggerTypePostSandboxRun captures enum value "post_sandbox_run"
+	AppActionWorkflowTriggerTypePostSandboxRun AppActionWorkflowTriggerType = "post_sandbox_run"
+
+	// AppActionWorkflowTriggerTypePreDeploy captures enum value "pre_deploy"
+	AppActionWorkflowTriggerTypePreDeploy AppActionWorkflowTriggerType = "pre_deploy"
+
+	// AppActionWorkflowTriggerTypePostDeploy captures enum value "post_deploy"
+	AppActionWorkflowTriggerTypePostDeploy AppActionWorkflowTriggerType = "post_deploy"
 )
 
 // for schema
@@ -45,7 +54,7 @@ var appActionWorkflowTriggerTypeEnum []interface{}
 
 func init() {
 	var res []AppActionWorkflowTriggerType
-	if err := json.Unmarshal([]byte(`["manual","cron","post_install"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["manual","cron","pre_sandbox_run","post_sandbox_run","pre_deploy","post_deploy"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
