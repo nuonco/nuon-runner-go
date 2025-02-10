@@ -36,17 +36,17 @@ const (
 	// AppActionWorkflowTriggerTypeCron captures enum value "cron"
 	AppActionWorkflowTriggerTypeCron AppActionWorkflowTriggerType = "cron"
 
-	// AppActionWorkflowTriggerTypePreSandboxRun captures enum value "pre_sandbox_run"
-	AppActionWorkflowTriggerTypePreSandboxRun AppActionWorkflowTriggerType = "pre_sandbox_run"
+	// AppActionWorkflowTriggerTypePreDashSandboxDashRun captures enum value "pre-sandbox-run"
+	AppActionWorkflowTriggerTypePreDashSandboxDashRun AppActionWorkflowTriggerType = "pre-sandbox-run"
 
-	// AppActionWorkflowTriggerTypePostSandboxRun captures enum value "post_sandbox_run"
-	AppActionWorkflowTriggerTypePostSandboxRun AppActionWorkflowTriggerType = "post_sandbox_run"
+	// AppActionWorkflowTriggerTypePostDashSandboxDashRun captures enum value "post-sandbox-run"
+	AppActionWorkflowTriggerTypePostDashSandboxDashRun AppActionWorkflowTriggerType = "post-sandbox-run"
 
-	// AppActionWorkflowTriggerTypePreDeploy captures enum value "pre_deploy"
-	AppActionWorkflowTriggerTypePreDeploy AppActionWorkflowTriggerType = "pre_deploy"
+	// AppActionWorkflowTriggerTypePreDashDeploy captures enum value "pre-deploy"
+	AppActionWorkflowTriggerTypePreDashDeploy AppActionWorkflowTriggerType = "pre-deploy"
 
-	// AppActionWorkflowTriggerTypePostDeploy captures enum value "post_deploy"
-	AppActionWorkflowTriggerTypePostDeploy AppActionWorkflowTriggerType = "post_deploy"
+	// AppActionWorkflowTriggerTypePostDashDeploy captures enum value "post-deploy"
+	AppActionWorkflowTriggerTypePostDashDeploy AppActionWorkflowTriggerType = "post-deploy"
 )
 
 // for schema
@@ -54,7 +54,7 @@ var appActionWorkflowTriggerTypeEnum []interface{}
 
 func init() {
 	var res []AppActionWorkflowTriggerType
-	if err := json.Unmarshal([]byte(`["manual","cron","pre_sandbox_run","post_sandbox_run","pre_deploy","post_deploy"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["manual","cron","pre-sandbox-run","post-sandbox-run","pre-deploy","post-deploy"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

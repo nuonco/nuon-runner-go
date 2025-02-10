@@ -58,6 +58,9 @@ type AppRunnerJob struct {
 	// max executions
 	MaxExecutions int64 `json:"max_executions,omitempty"`
 
+	// metadata
+	Metadata map[string]string `json:"metadata,omitempty"`
+
 	// operation
 	Operation AppRunnerJobOperationType `json:"operation,omitempty"`
 
@@ -68,7 +71,7 @@ type AppRunnerJob struct {
 	Outputs interface{} `json:"outputs,omitempty"`
 
 	// outputs json
-	OutputsJSON []int64 `json:"outputs_json"`
+	OutputsJSON string `json:"outputs_json,omitempty"`
 
 	// overall timeout is how long a job can be attempted, before being cancelled
 	OverallTimeout int64 `json:"overall_timeout,omitempty"`

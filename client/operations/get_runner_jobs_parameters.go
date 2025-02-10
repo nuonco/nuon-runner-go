@@ -66,7 +66,7 @@ type GetRunnerJobsParams struct {
 
 	   job group
 
-	   Default: "\"any\""
+	   Default: "any"
 	*/
 	Group *string
 
@@ -88,7 +88,7 @@ type GetRunnerJobsParams struct {
 
 	   job status
 
-	   Default: "\"available\""
+	   Default: "available"
 	*/
 	Status *string
 
@@ -110,11 +110,11 @@ func (o *GetRunnerJobsParams) WithDefaults() *GetRunnerJobsParams {
 // All values with no default are reset to their zero value.
 func (o *GetRunnerJobsParams) SetDefaults() {
 	var (
-		groupDefault = string("\"any\"")
+		groupDefault = string("any")
 
 		limitDefault = int64(10)
 
-		statusDefault = string("\"available\"")
+		statusDefault = string("available")
 	)
 
 	val := GetRunnerJobsParams{

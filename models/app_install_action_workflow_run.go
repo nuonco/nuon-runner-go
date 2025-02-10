@@ -37,11 +37,20 @@ type AppInstallActionWorkflowRun struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// install action workflow
+	InstallActionWorkflow *AppInstallActionWorkflow `json:"install_action_workflow,omitempty"`
+
+	// install action workflow id
+	InstallActionWorkflowID string `json:"install_action_workflow_id,omitempty"`
+
 	// install id
 	InstallID string `json:"install_id,omitempty"`
 
 	// log stream
 	LogStream *AppLogStream `json:"log_stream,omitempty"`
+
+	// outputs
+	Outputs interface{} `json:"outputs,omitempty"`
 
 	// run env vars
 	RunEnvVars map[string]string `json:"run_env_vars,omitempty"`
@@ -61,6 +70,12 @@ type AppInstallActionWorkflowRun struct {
 	// trigger type
 	TriggerType AppActionWorkflowTriggerType `json:"trigger_type,omitempty"`
 
+	// triggered by id
+	TriggeredByID string `json:"triggered_by_id,omitempty"`
+
+	// triggered by type
+	TriggeredByType string `json:"triggered_by_type,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
@@ -70,6 +85,10 @@ func (m *AppInstallActionWorkflowRun) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallActionWorkflow(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -106,6 +125,25 @@ func (m *AppInstallActionWorkflowRun) validateConfig(formats strfmt.Registry) er
 				return ve.ValidateName("config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) validateInstallActionWorkflow(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallActionWorkflow) { // not required
+		return nil
+	}
+
+	if m.InstallActionWorkflow != nil {
+		if err := m.InstallActionWorkflow.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_action_workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_action_workflow")
 			}
 			return err
 		}
@@ -203,6 +241,10 @@ func (m *AppInstallActionWorkflowRun) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInstallActionWorkflow(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLogStream(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -238,6 +280,27 @@ func (m *AppInstallActionWorkflowRun) contextValidateConfig(ctx context.Context,
 				return ve.ValidateName("config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) contextValidateInstallActionWorkflow(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallActionWorkflow != nil {
+
+		if swag.IsZero(m.InstallActionWorkflow) { // not required
+			return nil
+		}
+
+		if err := m.InstallActionWorkflow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_action_workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_action_workflow")
 			}
 			return err
 		}
