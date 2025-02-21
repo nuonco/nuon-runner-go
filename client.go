@@ -60,12 +60,15 @@ type client struct {
 
 	genClient    *genclient.NuonRunnerAPI
 	appTransport *appTransport
+	retryer      Retryer
 }
 
 type clientOption func(*client) error
 
 func New(opts ...clientOption) (*client, error) {
-	c := &client{}
+	c := &client{
+		retryer: &defaultRetryer{},
+	}
 	for _, opt := range opts {
 		if err := opt(c); err != nil {
 			return nil, err
@@ -126,6 +129,14 @@ func WithRunnerID(runnerID string) clientOption {
 func WithValidator(v *validator.Validate) clientOption {
 	return func(c *client) error {
 		c.v = v
+		return nil
+	}
+}
+
+// WithRetryer specifies a retryer to use
+func WithRetryer(r Retryer) clientOption {
+	return func(c *client) error {
+		c.retryer = r
 		return nil
 	}
 }
