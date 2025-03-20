@@ -88,13 +88,13 @@ type ClientService interface {
 
 	PublishMetrics(params *PublishMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PublishMetricsOK, error)
 
-	RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsCreated, error)
-
 	RunnerOtelWriteMetrics(params *RunnerOtelWriteMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteMetricsCreated, error)
 
 	RunnerOtelWriteTraces(params *RunnerOtelWriteTracesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteTracesCreated, error)
 
 	UpdateInstallActionWorkflowRunStep(params *UpdateInstallActionWorkflowRunStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallActionWorkflowRunStepOK, error)
+
+	UpdateRunnerJob(params *UpdateRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerJobOK, error)
 
 	UpdateRunnerJobExecution(params *UpdateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerJobExecutionOK, error)
 
@@ -758,52 +758,6 @@ func (a *Client) PublishMetrics(params *PublishMetricsParams, authInfo runtime.C
 }
 
 /*
-	RunnerOtelWriteLogs runners write logs
-
-	OTEL Exporter compatible endpoint for writing logs. Designed to work with the
-
-custom, runner otel collector/exporter stack. The inbound data schema is the
-schema defined by the spec. We use the official otel go SDK for this.
-
-This endpoint accepts protobuffs, but not JSON.
-*/
-func (a *Client) RunnerOtelWriteLogs(params *RunnerOtelWriteLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RunnerOtelWriteLogsCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewRunnerOtelWriteLogsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "RunnerOtelWriteLogs",
-		Method:             "POST",
-		PathPattern:        "/v1/runners/{runner_id}/logs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RunnerOtelWriteLogsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*RunnerOtelWriteLogsCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for RunnerOtelWriteLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 	RunnerOtelWriteMetrics runners write metrics
 
 	OTEL Exporter compatible endpoint for writing metrics. Designed to work with the custom, runner otel collector/exporter
@@ -927,6 +881,49 @@ func (a *Client) UpdateInstallActionWorkflowRunStep(params *UpdateInstallActionW
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstallActionWorkflowRunStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UpdateRunnerJob updates a runner job
+
+	Update a runner job, and mark it's status.
+
+This is only used for shutdown jobs to mark that a forced shutdown job was completed.
+*/
+func (a *Client) UpdateRunnerJob(params *UpdateRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerJobOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateRunnerJobParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateRunnerJob",
+		Method:             "PATCH",
+		PathPattern:        "/v1/runner-jobs/{runner_job_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateRunnerJobReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateRunnerJobOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateRunnerJob: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

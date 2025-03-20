@@ -72,11 +72,17 @@ type GetRunnerJobsParams struct {
 
 	/* Limit.
 
-	   limit of jobs to return
+	   limit of results to return
 
 	   Default: 10
 	*/
 	Limit *int64
+
+	/* Offset.
+
+	   offset of results to return
+	*/
+	Offset *int64
 
 	/* RunnerID.
 
@@ -91,6 +97,12 @@ type GetRunnerJobsParams struct {
 	   Default: "available"
 	*/
 	Status *string
+
+	/* XNuonPaginationEnabled.
+
+	   Enable pagination
+	*/
+	XNuonPaginationEnabled *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -114,12 +126,15 @@ func (o *GetRunnerJobsParams) SetDefaults() {
 
 		limitDefault = int64(10)
 
+		offsetDefault = int64(0)
+
 		statusDefault = string("available")
 	)
 
 	val := GetRunnerJobsParams{
 		Group:  &groupDefault,
 		Limit:  &limitDefault,
+		Offset: &offsetDefault,
 		Status: &statusDefault,
 	}
 
@@ -184,6 +199,17 @@ func (o *GetRunnerJobsParams) SetLimit(limit *int64) {
 	o.Limit = limit
 }
 
+// WithOffset adds the offset to the get runner jobs params
+func (o *GetRunnerJobsParams) WithOffset(offset *int64) *GetRunnerJobsParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the get runner jobs params
+func (o *GetRunnerJobsParams) SetOffset(offset *int64) {
+	o.Offset = offset
+}
+
 // WithRunnerID adds the runnerID to the get runner jobs params
 func (o *GetRunnerJobsParams) WithRunnerID(runnerID string) *GetRunnerJobsParams {
 	o.SetRunnerID(runnerID)
@@ -204,6 +230,17 @@ func (o *GetRunnerJobsParams) WithStatus(status *string) *GetRunnerJobsParams {
 // SetStatus adds the status to the get runner jobs params
 func (o *GetRunnerJobsParams) SetStatus(status *string) {
 	o.Status = status
+}
+
+// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner jobs params
+func (o *GetRunnerJobsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetRunnerJobsParams {
+	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+	return o
+}
+
+// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner jobs params
+func (o *GetRunnerJobsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
+	o.XNuonPaginationEnabled = xNuonPaginationEnabled
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -248,6 +285,23 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
 	// path param runner_id
 	if err := r.SetPathParam("runner_id", o.RunnerID); err != nil {
 		return err
@@ -267,6 +321,14 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 			if err := r.SetQueryParam("status", qStatus); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.XNuonPaginationEnabled != nil {
+
+		// header param x-nuon-pagination-enabled
+		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
+			return err
 		}
 	}
 

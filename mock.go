@@ -257,6 +257,21 @@ func (mr *MockClientMockRecorder) UpdateInstallActionWorkflowRunStep(ctx, instal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstallActionWorkflowRunStep", reflect.TypeOf((*MockClient)(nil).UpdateInstallActionWorkflowRunStep), ctx, installID, workflowID, runID, req)
 }
 
+// UpdateJob mocks base method.
+func (m *MockClient) UpdateJob(ctx context.Context, jobID string, req *models.ServiceUpdateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateJob", ctx, jobID, req)
+	ret0, _ := ret[0].(*models.AppRunnerJobExecution)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateJob indicates an expected call of UpdateJob.
+func (mr *MockClientMockRecorder) UpdateJob(ctx, jobID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateJob", reflect.TypeOf((*MockClient)(nil).UpdateJob), ctx, jobID, req)
+}
+
 // UpdateJobExecution mocks base method.
 func (m *MockClient) UpdateJobExecution(ctx context.Context, jobID, jobExecutionID string, req *models.ServiceUpdateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error) {
 	m.ctrl.T.Helper()
