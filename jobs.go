@@ -48,3 +48,16 @@ func (c *client) GetJobPlanJSON(ctx context.Context, jobID string) (string, erro
 
 	return resp.Payload, nil
 }
+
+func (c *client) UpdateJob(ctx context.Context, jobID string, req *models.ServiceUpdateRunnerJobRequest) (*models.AppRunnerJob, error) {
+	resp, err := c.genClient.Operations.UpdateRunnerJob(&operations.UpdateRunnerJobParams{
+		Req:         req,
+		RunnerJobID: jobID,
+		Context:     ctx,
+	}, c.getAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
