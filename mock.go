@@ -258,10 +258,10 @@ func (mr *MockClientMockRecorder) UpdateInstallActionWorkflowRunStep(ctx, instal
 }
 
 // UpdateJob mocks base method.
-func (m *MockClient) UpdateJob(ctx context.Context, jobID string, req *models.ServiceUpdateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error) {
+func (m *MockClient) UpdateJob(ctx context.Context, jobID string, req *models.ServiceUpdateRunnerJobRequest) (*models.AppRunnerJob, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateJob", ctx, jobID, req)
-	ret0, _ := ret[0].(*models.AppRunnerJobExecution)
+	ret0, _ := ret[0].(*models.AppRunnerJob)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
