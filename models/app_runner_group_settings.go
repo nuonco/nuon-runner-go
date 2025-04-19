@@ -17,8 +17,14 @@ import (
 // swagger:model app.RunnerGroupSettings
 type AppRunnerGroupSettings struct {
 
-	// specific configuration for cloud specific runners, such as AWS or Azure
-	AwsIamRoleArn string `json:"aws_iam_role_arn,omitempty"`
+	// aws cloudformation stack type
+	AwsCloudformationStackType string `json:"aws_cloudformation_stack_type,omitempty"`
+
+	// aws runner specifics runner-v2
+	AwsInstanceType string `json:"aws_instance_type,omitempty"`
+
+	// aws tags
+	AwsTags map[string]string `json:"aws_tags,omitempty"`
 
 	// container image tag
 	ContainerImageTag string `json:"container_image_tag,omitempty"`
@@ -50,14 +56,17 @@ type AppRunnerGroupSettings struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// k8s service account name
-	K8sServiceAccountName string `json:"k8s_service_account_name,omitempty"`
+	// local aws iam role arn
+	LocalAwsIamRoleArn string `json:"local_aws_iam_role_arn,omitempty"`
 
 	// logging level
 	LoggingLevel string `json:"logging_level,omitempty"`
 
 	// Metadata is used as both log and metric tags/attributes in the runner when emitting data
 	Metadata map[string]string `json:"metadata,omitempty"`
+
+	// org runner specifics
+	OrgAwsIamRoleArn string `json:"org_aws_iam_role_arn,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
