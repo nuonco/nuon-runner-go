@@ -18,6 +18,9 @@ import (
 // swagger:model app.AppRunnerConfig
 type AppAppRunnerConfig struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
@@ -30,14 +33,14 @@ type AppAppRunnerConfig struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *AppAccount `json:"created_by,omitempty"`
-
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
+
+	// helm driver
+	HelmDriver string `json:"helm_driver,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -58,10 +61,6 @@ func (m *AppAppRunnerConfig) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCloudPlatform(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -105,25 +104,6 @@ func (m *AppAppRunnerConfig) validateCloudPlatform(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *AppAppRunnerConfig) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app app runner config based on the context it is used
 func (m *AppAppRunnerConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -133,10 +113,6 @@ func (m *AppAppRunnerConfig) ContextValidate(ctx context.Context, formats strfmt
 	}
 
 	if err := m.contextValidateCloudPlatform(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -177,27 +153,6 @@ func (m *AppAppRunnerConfig) contextValidateCloudPlatform(ctx context.Context, f
 			return ce.ValidateName("cloud_platform")
 		}
 		return err
-	}
-
-	return nil
-}
-
-func (m *AppAppRunnerConfig) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
 	}
 
 	return nil
