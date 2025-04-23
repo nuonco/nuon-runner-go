@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,29 +22,53 @@ type AppAppConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
-	// content
-	Content string `json:"content,omitempty"`
+	// break glass
+	BreakGlass *AppAppBreakGlassConfig `json:"break_glass,omitempty"`
+
+	// checksum
+	Checksum string `json:"checksum,omitempty"`
+
+	// component config connections
+	ComponentConfigConnections []*AppComponentConfigConnection `json:"component_config_connections"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *AppAccount `json:"created_by,omitempty"`
-
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
-
-	// format
-	Format AppAppConfigFmt `json:"format,omitempty"`
-
-	// generated terraform
-	GeneratedTerraform string `json:"generated_terraform,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
 
+	// input
+	Input *AppAppInputConfig `json:"input,omitempty"`
+
 	// org id
 	OrgID string `json:"org_id,omitempty"`
+
+	// permissions
+	Permissions *AppAppPermissionsConfig `json:"permissions,omitempty"`
+
+	// policies
+	Policies *AppAppPoliciesConfig `json:"policies,omitempty"`
+
+	// readme
+	Readme string `json:"readme,omitempty"`
+
+	// runner
+	Runner *AppAppRunnerConfig `json:"runner,omitempty"`
+
+	// sandbox
+	Sandbox *AppAppSandboxConfig `json:"sandbox,omitempty"`
+
+	// secrets
+	Secrets *AppAppSecretsConfig `json:"secrets,omitempty"`
+
+	// stack
+	Stack *AppAppStackConfig `json:"stack,omitempty"`
+
+	// state
+	State string `json:"state,omitempty"`
 
 	// status
 	Status AppAppConfigStatus `json:"status,omitempty"`
@@ -62,11 +87,39 @@ type AppAppConfig struct {
 func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCreatedBy(formats); err != nil {
+	if err := m.validateBreakGlass(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateFormat(formats); err != nil {
+	if err := m.validateComponentConfigConnections(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInput(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePermissions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePolicies(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunner(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSandbox(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSecrets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStack(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -80,17 +133,17 @@ func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppAppConfig) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
+func (m *AppAppConfig) validateBreakGlass(formats strfmt.Registry) error {
+	if swag.IsZero(m.BreakGlass) { // not required
 		return nil
 	}
 
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
+	if m.BreakGlass != nil {
+		if err := m.BreakGlass.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
+				return ve.ValidateName("break_glass")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
+				return ce.ValidateName("break_glass")
 			}
 			return err
 		}
@@ -99,18 +152,160 @@ func (m *AppAppConfig) validateCreatedBy(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppAppConfig) validateFormat(formats strfmt.Registry) error {
-	if swag.IsZero(m.Format) { // not required
+func (m *AppAppConfig) validateComponentConfigConnections(formats strfmt.Registry) error {
+	if swag.IsZero(m.ComponentConfigConnections) { // not required
 		return nil
 	}
 
-	if err := m.Format.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("format")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("format")
+	for i := 0; i < len(m.ComponentConfigConnections); i++ {
+		if swag.IsZero(m.ComponentConfigConnections[i]) { // not required
+			continue
 		}
-		return err
+
+		if m.ComponentConfigConnections[i] != nil {
+			if err := m.ComponentConfigConnections[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validateInput(formats strfmt.Registry) error {
+	if swag.IsZero(m.Input) { // not required
+		return nil
+	}
+
+	if m.Input != nil {
+		if err := m.Input.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("input")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("input")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validatePermissions(formats strfmt.Registry) error {
+	if swag.IsZero(m.Permissions) { // not required
+		return nil
+	}
+
+	if m.Permissions != nil {
+		if err := m.Permissions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validatePolicies(formats strfmt.Registry) error {
+	if swag.IsZero(m.Policies) { // not required
+		return nil
+	}
+
+	if m.Policies != nil {
+		if err := m.Policies.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("policies")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("policies")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validateRunner(formats strfmt.Registry) error {
+	if swag.IsZero(m.Runner) { // not required
+		return nil
+	}
+
+	if m.Runner != nil {
+		if err := m.Runner.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validateSandbox(formats strfmt.Registry) error {
+	if swag.IsZero(m.Sandbox) { // not required
+		return nil
+	}
+
+	if m.Sandbox != nil {
+		if err := m.Sandbox.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sandbox")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validateSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.Secrets) { // not required
+		return nil
+	}
+
+	if m.Secrets != nil {
+		if err := m.Secrets.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validateStack(formats strfmt.Registry) error {
+	if swag.IsZero(m.Stack) { // not required
+		return nil
+	}
+
+	if m.Stack != nil {
+		if err := m.Stack.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("stack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("stack")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -137,11 +332,39 @@ func (m *AppAppConfig) validateStatus(formats strfmt.Registry) error {
 func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+	if err := m.contextValidateBreakGlass(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateFormat(ctx, formats); err != nil {
+	if err := m.contextValidateComponentConfigConnections(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInput(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePermissions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePolicies(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSandbox(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSecrets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStack(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -155,19 +378,19 @@ func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Regis
 	return nil
 }
 
-func (m *AppAppConfig) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppAppConfig) contextValidateBreakGlass(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.CreatedBy != nil {
+	if m.BreakGlass != nil {
 
-		if swag.IsZero(m.CreatedBy) { // not required
+		if swag.IsZero(m.BreakGlass) { // not required
 			return nil
 		}
 
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
+		if err := m.BreakGlass.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
+				return ve.ValidateName("break_glass")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
+				return ce.ValidateName("break_glass")
 			}
 			return err
 		}
@@ -176,19 +399,173 @@ func (m *AppAppConfig) contextValidateCreatedBy(ctx context.Context, formats str
 	return nil
 }
 
-func (m *AppAppConfig) contextValidateFormat(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppAppConfig) contextValidateComponentConfigConnections(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Format) { // not required
-		return nil
+	for i := 0; i < len(m.ComponentConfigConnections); i++ {
+
+		if m.ComponentConfigConnections[i] != nil {
+
+			if swag.IsZero(m.ComponentConfigConnections[i]) { // not required
+				return nil
+			}
+
+			if err := m.ComponentConfigConnections[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
-	if err := m.Format.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("format")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("format")
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateInput(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Input != nil {
+
+		if swag.IsZero(m.Input) { // not required
+			return nil
 		}
-		return err
+
+		if err := m.Input.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("input")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("input")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidatePermissions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Permissions != nil {
+
+		if swag.IsZero(m.Permissions) { // not required
+			return nil
+		}
+
+		if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidatePolicies(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Policies != nil {
+
+		if swag.IsZero(m.Policies) { // not required
+			return nil
+		}
+
+		if err := m.Policies.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("policies")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("policies")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateRunner(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Runner != nil {
+
+		if swag.IsZero(m.Runner) { // not required
+			return nil
+		}
+
+		if err := m.Runner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateSandbox(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Sandbox != nil {
+
+		if swag.IsZero(m.Sandbox) { // not required
+			return nil
+		}
+
+		if err := m.Sandbox.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sandbox")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateSecrets(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Secrets != nil {
+
+		if swag.IsZero(m.Secrets) { // not required
+			return nil
+		}
+
+		if err := m.Secrets.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateStack(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Stack != nil {
+
+		if swag.IsZero(m.Stack) { // not required
+			return nil
+		}
+
+		if err := m.Stack.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("stack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("stack")
+			}
+			return err
+		}
 	}
 
 	return nil

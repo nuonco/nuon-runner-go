@@ -71,6 +71,9 @@ type AppRunnerGroupSettings struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// org k8s service account name
+	OrgK8sServiceAccountName string `json:"org_k8s_service_account_name,omitempty"`
+
 	// otel collector config
 	OtelCollectorConfig string `json:"otel_collector_config,omitempty"`
 

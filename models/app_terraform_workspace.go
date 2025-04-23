@@ -12,13 +12,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AppAppAWSDelegationConfig app app a w s delegation config
+// AppTerraformWorkspace app terraform workspace
 //
-// swagger:model app.AppAWSDelegationConfig
-type AppAppAWSDelegationConfig struct {
-
-	// app sandbox config id
-	AppSandboxConfigID string `json:"app_sandbox_config_id,omitempty"`
+// swagger:model app.TerraformWorkspace
+type AppTerraformWorkspace struct {
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -26,31 +23,34 @@ type AppAppAWSDelegationConfig struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// iam role arn
-	IamRoleArn string `json:"iam_role_arn,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// owner id
+	OwnerID string `json:"owner_id,omitempty"`
+
+	// owner type
+	OwnerType string `json:"owner_type,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
 
-// Validate validates this app app a w s delegation config
-func (m *AppAppAWSDelegationConfig) Validate(formats strfmt.Registry) error {
+// Validate validates this app terraform workspace
+func (m *AppTerraformWorkspace) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this app app a w s delegation config based on context it is used
-func (m *AppAppAWSDelegationConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this app terraform workspace based on context it is used
+func (m *AppTerraformWorkspace) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *AppAppAWSDelegationConfig) MarshalBinary() ([]byte, error) {
+func (m *AppTerraformWorkspace) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -58,8 +58,8 @@ func (m *AppAppAWSDelegationConfig) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *AppAppAWSDelegationConfig) UnmarshalBinary(b []byte) error {
-	var res AppAppAWSDelegationConfig
+func (m *AppTerraformWorkspace) UnmarshalBinary(b []byte) error {
+	var res AppTerraformWorkspace
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -12,22 +12,22 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AppAppAWSDelegationConfig app app a w s delegation config
+// AppAppPoliciesConfig app app policies config
 //
-// swagger:model app.AppAWSDelegationConfig
-type AppAppAWSDelegationConfig struct {
+// swagger:model app.AppPoliciesConfig
+type AppAppPoliciesConfig struct {
 
-	// app sandbox config id
-	AppSandboxConfigID string `json:"app_sandbox_config_id,omitempty"`
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
+	// app id
+	AppID string `json:"app_id,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
-
-	// iam role arn
-	IamRoleArn string `json:"iam_role_arn,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -39,18 +39,18 @@ type AppAppAWSDelegationConfig struct {
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
 
-// Validate validates this app app a w s delegation config
-func (m *AppAppAWSDelegationConfig) Validate(formats strfmt.Registry) error {
+// Validate validates this app app policies config
+func (m *AppAppPoliciesConfig) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this app app a w s delegation config based on context it is used
-func (m *AppAppAWSDelegationConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this app app policies config based on context it is used
+func (m *AppAppPoliciesConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *AppAppAWSDelegationConfig) MarshalBinary() ([]byte, error) {
+func (m *AppAppPoliciesConfig) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -58,8 +58,8 @@ func (m *AppAppAWSDelegationConfig) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *AppAppAWSDelegationConfig) UnmarshalBinary(b []byte) error {
-	var res AppAppAWSDelegationConfig
+func (m *AppAppPoliciesConfig) UnmarshalBinary(b []byte) error {
+	var res AppAppPoliciesConfig
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
