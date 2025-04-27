@@ -36,8 +36,14 @@ type AppHelmComponentConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// namespace
+	Namespace string `json:"namespace,omitempty"`
+
 	// public git vcs config
 	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
+
+	// storage driver
+	StorageDriver string `json:"storage_driver,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`

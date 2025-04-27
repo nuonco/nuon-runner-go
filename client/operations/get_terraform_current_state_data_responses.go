@@ -76,7 +76,7 @@ GetTerraformCurrentStateDataOK describes a response with status code 200, with d
 OK
 */
 type GetTerraformCurrentStateDataOK struct {
-	Payload *models.AppTerraformState
+	Payload *models.AppTerraformWorkspaceState
 }
 
 // IsSuccess returns true when this get terraform current state data o k response has a 2xx status code
@@ -119,13 +119,13 @@ func (o *GetTerraformCurrentStateDataOK) String() string {
 	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataOK %s", 200, payload)
 }
 
-func (o *GetTerraformCurrentStateDataOK) GetPayload() *models.AppTerraformState {
+func (o *GetTerraformCurrentStateDataOK) GetPayload() *models.AppTerraformWorkspaceState {
 	return o.Payload
 }
 
 func (o *GetTerraformCurrentStateDataOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppTerraformState)
+	o.Payload = new(models.AppTerraformWorkspaceState)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
