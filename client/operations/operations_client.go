@@ -92,7 +92,13 @@ type ClientService interface {
 
 	GetTerraformCurrentStateData(params *GetTerraformCurrentStateDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformCurrentStateDataOK, error)
 
+	GetTerraformStates(params *GetTerraformStatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStatesOK, error)
+
 	GetTerraformWorkspace(params *GetTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceOK, error)
+
+	GetTerraformWorkspaceStateByID(params *GetTerraformWorkspaceStateByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateByIDOK, error)
+
+	GetTerraformWorkspaceStateResources(params *GetTerraformWorkspaceStateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateResourcesOK, error)
 
 	GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspacesOK, error)
 
@@ -850,6 +856,45 @@ func (a *Client) GetTerraformCurrentStateData(params *GetTerraformCurrentStateDa
 }
 
 /*
+GetTerraformStates gets terraform states
+*/
+func (a *Client) GetTerraformStates(params *GetTerraformStatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStatesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTerraformStatesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTerraformStates",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/terraform-workspace/{workspace_id}/states",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTerraformStatesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTerraformStatesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetTerraformStates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetTerraformWorkspace gets terraform workspace
 */
 func (a *Client) GetTerraformWorkspace(params *GetTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceOK, error) {
@@ -885,6 +930,84 @@ func (a *Client) GetTerraformWorkspace(params *GetTerraformWorkspaceParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetTerraformWorkspaceStateByID gets terraform state by ID
+*/
+func (a *Client) GetTerraformWorkspaceStateByID(params *GetTerraformWorkspaceStateByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTerraformWorkspaceStateByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTerraformWorkspaceStateByID",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/terraform-workspace/{workspace_id}/states/{state_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTerraformWorkspaceStateByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTerraformWorkspaceStateByIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetTerraformWorkspaceStateResources gets terraform state resources
+*/
+func (a *Client) GetTerraformWorkspaceStateResources(params *GetTerraformWorkspaceStateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateResourcesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTerraformWorkspaceStateResourcesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTerraformWorkspaceStateResources",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/terraform-workspace/{workspace_id}/states/{state_id}/resources",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTerraformWorkspaceStateResourcesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTerraformWorkspaceStateResourcesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

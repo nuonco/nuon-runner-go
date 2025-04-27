@@ -140,6 +140,21 @@ func (mr *MockClientMockRecorder) GetActionWorkflowLatestConfig(ctx, workflowID 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetActionWorkflowLatestConfig", reflect.TypeOf((*MockClient)(nil).GetActionWorkflowLatestConfig), ctx, workflowID)
 }
 
+// GetAppConfig mocks base method.
+func (m *MockClient) GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppConfig", ctx, appID, appConfigID)
+	ret0, _ := ret[0].(*models.AppAppConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppConfig indicates an expected call of GetAppConfig.
+func (mr *MockClientMockRecorder) GetAppConfig(ctx, appID, appConfigID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfig", reflect.TypeOf((*MockClient)(nil).GetAppConfig), ctx, appID, appConfigID)
+}
+
 // GetInstallActionWorkflowRun mocks base method.
 func (m *MockClient) GetInstallActionWorkflowRun(ctx context.Context, installID, runID string) (*models.AppInstallActionWorkflowRun, error) {
 	m.ctrl.T.Helper()

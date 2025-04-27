@@ -76,7 +76,7 @@ UpdateTerraformStateOK describes a response with status code 200, with default h
 OK
 */
 type UpdateTerraformStateOK struct {
-	Payload *models.AppTerraformState
+	Payload *models.AppTerraformWorkspaceState
 }
 
 // IsSuccess returns true when this update terraform state o k response has a 2xx status code
@@ -119,13 +119,13 @@ func (o *UpdateTerraformStateOK) String() string {
 	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK %s", 200, payload)
 }
 
-func (o *UpdateTerraformStateOK) GetPayload() *models.AppTerraformState {
+func (o *UpdateTerraformStateOK) GetPayload() *models.AppTerraformWorkspaceState {
 	return o.Payload
 }
 
 func (o *UpdateTerraformStateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppTerraformState)
+	o.Payload = new(models.AppTerraformWorkspaceState)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
