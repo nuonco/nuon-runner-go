@@ -66,6 +66,8 @@ type ClientService interface {
 
 	CreateRunnerJobExecutionResult(params *CreateRunnerJobExecutionResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerJobExecutionResultCreated, error)
 
+	CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformWorkspaceCreated, error)
+
 	DeleteTerraformState(params *DeleteTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformStateOK, error)
 
 	DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformWorkspaceOK, error)
@@ -325,6 +327,45 @@ func (a *Client) CreateRunnerJobExecutionResult(params *CreateRunnerJobExecution
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateRunnerJobExecutionResult: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateTerraformWorkspace creates terraform workspace
+*/
+func (a *Client) CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformWorkspaceCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateTerraformWorkspaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateTerraformWorkspace",
+		Method:             "POST",
+		PathPattern:        "/v1/terraform-workspace",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateTerraformWorkspaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateTerraformWorkspaceCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateTerraformWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
