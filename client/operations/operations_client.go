@@ -56,6 +56,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CreateHelmRelease(params *CreateHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHelmReleaseOK, error)
+
 	CreateRunnerHealthCheck(params *CreateRunnerHealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHealthCheckCreated, error)
 
 	CreateRunnerHeartBeat(params *CreateRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHeartBeatCreated, error)
@@ -68,6 +70,8 @@ type ClientService interface {
 
 	CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformWorkspaceCreated, error)
 
+	DeleteHelmRelease(params *DeleteHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHelmReleaseOK, error)
+
 	DeleteTerraformState(params *DeleteTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformStateOK, error)
 
 	DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformWorkspaceOK, error)
@@ -75,6 +79,10 @@ type ClientService interface {
 	GetActionWorkflowConfig(params *GetActionWorkflowConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowConfigOK, error)
 
 	GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowLatestConfigOK, error)
+
+	GetHelmRelease(params *GetHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmReleaseOK, error)
+
+	GetHelmReleases(params *GetHelmReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmReleasesOK, error)
 
 	GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunOK, error)
 
@@ -121,6 +129,45 @@ type ClientService interface {
 	UpdateTerraformState(params *UpdateTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+CreateHelmRelease creates helm release
+*/
+func (a *Client) CreateHelmRelease(params *CreateHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHelmReleaseOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateHelmReleaseParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateHelmRelease",
+		Method:             "POST",
+		PathPattern:        "/v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateHelmReleaseReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateHelmReleaseOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateHelmRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -370,6 +417,45 @@ func (a *Client) CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams
 }
 
 /*
+DeleteHelmRelease deletes helm release
+*/
+func (a *Client) DeleteHelmRelease(params *DeleteHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHelmReleaseOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteHelmReleaseParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteHelmRelease",
+		Method:             "DELETE",
+		PathPattern:        "/v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteHelmReleaseReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteHelmReleaseOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteHelmRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DeleteTerraformState deletes terraform state
 */
 func (a *Client) DeleteTerraformState(params *DeleteTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformStateOK, error) {
@@ -526,6 +612,84 @@ func (a *Client) GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestCo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionWorkflowLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetHelmRelease gets helm release
+*/
+func (a *Client) GetHelmRelease(params *GetHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmReleaseOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetHelmReleaseParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetHelmRelease",
+		Method:             "GET",
+		PathPattern:        "/v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetHelmReleaseReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetHelmReleaseOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetHelmRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetHelmReleases gets helm releases
+*/
+func (a *Client) GetHelmReleases(params *GetHelmReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmReleasesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetHelmReleasesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetHelmReleases",
+		Method:             "GET",
+		PathPattern:        "/v1/helm-releases/{helm_chart_id}/releases/{namespace}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetHelmReleasesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetHelmReleasesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetHelmReleases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
