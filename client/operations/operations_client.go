@@ -9,38 +9,12 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
-}
-
-// New creates a new operations API client with basic auth credentials.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - user: user for basic authentication header.
-// - password: password for basic authentication header.
-func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
-	return &Client{transport: transport, formats: strfmt.Default}
-}
-
-// New creates a new operations API client with a bearer token for authentication.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - bearerToken: bearer token for Bearer authentication header.
-func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
-	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -51,7 +25,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption may be used to customize the behavior of Client methods.
+// ClientOption is the option for Client methods
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -73,6 +47,8 @@ type ClientService interface {
 	DeleteHelmRelease(params *DeleteHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteHelmReleaseOK, error)
 
 	DeleteTerraformState(params *DeleteTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformStateOK, error)
+
+	DeleteTerraformStateJSON(params *DeleteTerraformStateJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformStateJSONOK, error)
 
 	DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformWorkspaceOK, error)
 
@@ -102,6 +78,8 @@ type ClientService interface {
 
 	GetTerraformCurrentStateData(params *GetTerraformCurrentStateDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformCurrentStateDataOK, error)
 
+	GetTerraformStateJSON(params *GetTerraformStateJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStateJSONOK, error)
+
 	GetTerraformStates(params *GetTerraformStatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStatesOK, error)
 
 	GetTerraformWorkspace(params *GetTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceOK, error)
@@ -127,6 +105,8 @@ type ClientService interface {
 	UpdateRunnerJobExecution(params *UpdateRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerJobExecutionOK, error)
 
 	UpdateTerraformState(params *UpdateTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateOK, error)
+
+	UpdateTerraformStateJSON(params *UpdateTerraformStateJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateJSONOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -495,6 +475,45 @@ func (a *Client) DeleteTerraformState(params *DeleteTerraformStateParams, authIn
 }
 
 /*
+DeleteTerraformStateJSON deletes terraform state json
+*/
+func (a *Client) DeleteTerraformStateJSON(params *DeleteTerraformStateJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformStateJSONOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteTerraformStateJSONParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteTerraformStateJSON",
+		Method:             "DELETE",
+		PathPattern:        "/v1/terraform-workspaces/{workspace_id}/state",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteTerraformStateJSONReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteTerraformStateJSONOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteTerraformStateJSON: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DeleteTerraformWorkspace deletes terraform workspace
 */
 func (a *Client) DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformWorkspaceOK, error) {
@@ -505,7 +524,7 @@ func (a *Client) DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams
 	op := &runtime.ClientOperation{
 		ID:                 "DeleteTerraformWorkspace",
 		Method:             "DELETE",
-		PathPattern:        "/v1/terraform-workspace",
+		PathPattern:        "/v1/terraform-workspace/{workspace_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1061,6 +1080,45 @@ func (a *Client) GetTerraformCurrentStateData(params *GetTerraformCurrentStateDa
 }
 
 /*
+GetTerraformStateJSON gets terraform state json
+*/
+func (a *Client) GetTerraformStateJSON(params *GetTerraformStateJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStateJSONOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTerraformStateJSONParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTerraformStateJSON",
+		Method:             "GET",
+		PathPattern:        "/v1/terraform-workspaces/{workspace_id}/state",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTerraformStateJSONReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTerraformStateJSONOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetTerraformStateJSON: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetTerraformStates gets terraform states
 */
 func (a *Client) GetTerraformStates(params *GetTerraformStatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStatesOK, error) {
@@ -1110,7 +1168,7 @@ func (a *Client) GetTerraformWorkspace(params *GetTerraformWorkspaceParams, auth
 	op := &runtime.ClientOperation{
 		ID:                 "GetTerraformWorkspace",
 		Method:             "GET",
-		PathPattern:        "/v1/terraform-workspace",
+		PathPattern:        "/v1/terraform-workspace/{workspace_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1582,6 +1640,45 @@ func (a *Client) UpdateTerraformState(params *UpdateTerraformStateParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateTerraformState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateTerraformStateJSON updates terraform state json
+*/
+func (a *Client) UpdateTerraformStateJSON(params *UpdateTerraformStateJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateJSONOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateTerraformStateJSONParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateTerraformStateJSON",
+		Method:             "POST",
+		PathPattern:        "/v1/terraform-workspaces/{workspace_id}/state-json",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateTerraformStateJSONReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateTerraformStateJSONOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateTerraformStateJSON: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
