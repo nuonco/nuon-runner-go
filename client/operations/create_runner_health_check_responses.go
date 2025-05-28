@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateRunnerHealthCheckCreated) Code() int {
 }
 
 func (o *CreateRunnerHealthCheckCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckCreated) GetPayload() *models.AppRunnerHealthCheck {
@@ -180,13 +177,11 @@ func (o *CreateRunnerHealthCheckBadRequest) Code() int {
 }
 
 func (o *CreateRunnerHealthCheckBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateRunnerHealthCheckUnauthorized) Code() int {
 }
 
 func (o *CreateRunnerHealthCheckUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateRunnerHealthCheckForbidden) Code() int {
 }
 
 func (o *CreateRunnerHealthCheckForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateRunnerHealthCheckNotFound) Code() int {
 }
 
 func (o *CreateRunnerHealthCheckNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateRunnerHealthCheckInternalServerError) Code() int {
 }
 
 func (o *CreateRunnerHealthCheckInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/health-checks][%d] createRunnerHealthCheckInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateRunnerHealthCheckInternalServerError) GetPayload() *models.StderrErrResponse {

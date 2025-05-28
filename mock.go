@@ -302,6 +302,21 @@ func (mr *MockClientMockRecorder) UpdateJobExecution(ctx, jobID, jobExecutionID,
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateJobExecution", reflect.TypeOf((*MockClient)(nil).UpdateJobExecution), ctx, jobID, jobExecutionID, req)
 }
 
+// UpdateTerraformStateJSON mocks base method.
+func (m *MockClient) UpdateTerraformStateJSON(ctx context.Context, workspaceID string, jobID *string, reqBody any) (any, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTerraformStateJSON", ctx, workspaceID, jobID, reqBody)
+	ret0, _ := ret[0].(any)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTerraformStateJSON indicates an expected call of UpdateTerraformStateJSON.
+func (mr *MockClientMockRecorder) UpdateTerraformStateJSON(ctx, workspaceID, jobID, reqBody interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTerraformStateJSON", reflect.TypeOf((*MockClient)(nil).UpdateTerraformStateJSON), ctx, workspaceID, jobID, reqBody)
+}
+
 // WriteOTELLogs mocks base method.
 func (m *MockClient) WriteOTELLogs(ctx context.Context, req interface{}) error {
 	m.ctrl.T.Helper()
