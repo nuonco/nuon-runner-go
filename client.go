@@ -53,6 +53,9 @@ type Client interface {
 	GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error)
 
 	UpdateTerraformStateJSON(ctx context.Context, workspaceID string, jobID *string, reqBody any) (any, error)
+
+	LockTerraformWorkspace(ctx context.Context, workspaceID string, jobID *string, reqBody any) (any, error)
+	UnlockTerraformWorkspace(ctx context.Context, workspaceID string, reqBody any) (any, error)
 }
 
 var _ Client = (*client)(nil)
