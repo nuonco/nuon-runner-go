@@ -245,6 +245,21 @@ func (mr *MockClientMockRecorder) GetSettings(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSettings", reflect.TypeOf((*MockClient)(nil).GetSettings), ctx)
 }
 
+// LockTerraformWorkspace mocks base method.
+func (m *MockClient) LockTerraformWorkspace(ctx context.Context, workspaceID string, jobID *string, reqBody any) (any, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "LockTerraformWorkspace", ctx, workspaceID, jobID, reqBody)
+	ret0, _ := ret[0].(any)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LockTerraformWorkspace indicates an expected call of LockTerraformWorkspace.
+func (mr *MockClientMockRecorder) LockTerraformWorkspace(ctx, workspaceID, jobID, reqBody interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LockTerraformWorkspace", reflect.TypeOf((*MockClient)(nil).LockTerraformWorkspace), ctx, workspaceID, jobID, reqBody)
+}
+
 // SetRunnerID mocks base method.
 func (m *MockClient) SetRunnerID(runnerID string) {
 	m.ctrl.T.Helper()
@@ -255,6 +270,21 @@ func (m *MockClient) SetRunnerID(runnerID string) {
 func (mr *MockClientMockRecorder) SetRunnerID(runnerID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetRunnerID", reflect.TypeOf((*MockClient)(nil).SetRunnerID), runnerID)
+}
+
+// UnlockTerraformWorkspace mocks base method.
+func (m *MockClient) UnlockTerraformWorkspace(ctx context.Context, workspaceID string, reqBody any) (any, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UnlockTerraformWorkspace", ctx, workspaceID, reqBody)
+	ret0, _ := ret[0].(any)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UnlockTerraformWorkspace indicates an expected call of UnlockTerraformWorkspace.
+func (mr *MockClientMockRecorder) UnlockTerraformWorkspace(ctx, workspaceID, reqBody interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UnlockTerraformWorkspace", reflect.TypeOf((*MockClient)(nil).UnlockTerraformWorkspace), ctx, workspaceID, reqBody)
 }
 
 // UpdateInstallActionWorkflowRunStep mocks base method.
