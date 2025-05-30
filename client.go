@@ -54,8 +54,8 @@ type Client interface {
 
 	UpdateTerraformStateJSON(ctx context.Context, workspaceID string, jobID *string, reqBody any) (any, error)
 
-	LockTerraformWorkspace(ctx context.Context, workspaceID string, jobID *string, reqBody any) (any, error)
-	UnlockTerraformWorkspace(ctx context.Context, workspaceID string, reqBody any) (any, error)
+	LockTerraformWorkspace(ctx context.Context, workspaceID string, jobID *string, reqBody any) error
+	UnlockTerraformWorkspace(ctx context.Context, workspaceID string) error
 }
 
 var _ Client = (*client)(nil)
