@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -23,6 +24,9 @@ type AppComponentConfigConnection struct {
 
 	// app config version
 	AppConfigVersion int64 `json:"app_config_version,omitempty"`
+
+	// checksum
+	Checksum string `json:"checksum,omitempty"`
 
 	// component dependency ids
 	ComponentDependencyIds []string `json:"component_dependency_ids"`
@@ -54,6 +58,9 @@ type AppComponentConfigConnection struct {
 	// references
 	References []string `json:"references"`
 
+	// refs
+	Refs []*RefsRef `json:"refs"`
+
 	// terraform module
 	TerraformModule *AppTerraformModuleComponentConfig `json:"terraform_module,omitempty"`
 
@@ -84,6 +91,10 @@ func (m *AppComponentConfigConnection) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateJob(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRefs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -177,6 +188,32 @@ func (m *AppComponentConfigConnection) validateJob(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *AppComponentConfigConnection) validateRefs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Refs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Refs); i++ {
+		if swag.IsZero(m.Refs[i]) { // not required
+			continue
+		}
+
+		if m.Refs[i] != nil {
+			if err := m.Refs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *AppComponentConfigConnection) validateTerraformModule(formats strfmt.Registry) error {
 	if swag.IsZero(m.TerraformModule) { // not required
 		return nil
@@ -230,6 +267,10 @@ func (m *AppComponentConfigConnection) ContextValidate(ctx context.Context, form
 	}
 
 	if err := m.contextValidateJob(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRefs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -326,6 +367,31 @@ func (m *AppComponentConfigConnection) contextValidateJob(ctx context.Context, f
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppComponentConfigConnection) contextValidateRefs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Refs); i++ {
+
+		if m.Refs[i] != nil {
+
+			if swag.IsZero(m.Refs[i]) { // not required
+				return nil
+			}
+
+			if err := m.Refs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

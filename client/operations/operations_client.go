@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateHelmRelease(params *CreateHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHelmReleaseOK, error)
 
+	CreateInstallPlan(params *CreateInstallPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallPlanCreated, error)
+
 	CreateRunnerHealthCheck(params *CreateRunnerHealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHealthCheckCreated, error)
 
 	CreateRunnerHeartBeat(params *CreateRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRunnerHeartBeatCreated, error)
@@ -151,6 +153,45 @@ func (a *Client) CreateHelmRelease(params *CreateHelmReleaseParams, authInfo run
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateHelmRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateInstallPlan creates install plan
+*/
+func (a *Client) CreateInstallPlan(params *CreateInstallPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallPlanCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateInstallPlanParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateInstallPlan",
+		Method:             "POST",
+		PathPattern:        "/v1/install/{install_id}/plans",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateInstallPlanReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateInstallPlanCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateInstallPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

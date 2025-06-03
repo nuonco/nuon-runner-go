@@ -56,6 +56,9 @@ type Client interface {
 
 	LockTerraformWorkspace(ctx context.Context, workspaceID string, jobID *string, reqBody any) error
 	UnlockTerraformWorkspace(ctx context.Context, workspaceID string) error
+
+	// installs
+	CreateInstallPlan(ctx context.Context, installID string, req *models.ServiceCreateInstallPlanRequest) (*models.AppInstallPlan, error)
 }
 
 var _ Client = (*client)(nil)
