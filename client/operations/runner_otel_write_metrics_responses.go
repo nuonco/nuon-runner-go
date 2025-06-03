@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *RunnerOtelWriteMetricsCreated) Code() int {
 }
 
 func (o *RunnerOtelWriteMetricsCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsCreated %s", 201, payload)
 }
 
 func (o *RunnerOtelWriteMetricsCreated) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsCreated %s", 201, payload)
 }
 
 func (o *RunnerOtelWriteMetricsCreated) GetPayload() string {
@@ -175,11 +178,13 @@ func (o *RunnerOtelWriteMetricsBadRequest) Code() int {
 }
 
 func (o *RunnerOtelWriteMetricsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsBadRequest %s", 400, payload)
 }
 
 func (o *RunnerOtelWriteMetricsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsBadRequest %s", 400, payload)
 }
 
 func (o *RunnerOtelWriteMetricsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *RunnerOtelWriteMetricsUnauthorized) Code() int {
 }
 
 func (o *RunnerOtelWriteMetricsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsUnauthorized %s", 401, payload)
 }
 
 func (o *RunnerOtelWriteMetricsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsUnauthorized %s", 401, payload)
 }
 
 func (o *RunnerOtelWriteMetricsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *RunnerOtelWriteMetricsForbidden) Code() int {
 }
 
 func (o *RunnerOtelWriteMetricsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsForbidden %s", 403, payload)
 }
 
 func (o *RunnerOtelWriteMetricsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsForbidden %s", 403, payload)
 }
 
 func (o *RunnerOtelWriteMetricsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *RunnerOtelWriteMetricsNotFound) Code() int {
 }
 
 func (o *RunnerOtelWriteMetricsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsNotFound %s", 404, payload)
 }
 
 func (o *RunnerOtelWriteMetricsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsNotFound %s", 404, payload)
 }
 
 func (o *RunnerOtelWriteMetricsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *RunnerOtelWriteMetricsInternalServerError) Code() int {
 }
 
 func (o *RunnerOtelWriteMetricsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *RunnerOtelWriteMetricsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/metrics][%d] runnerOtelWriteMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *RunnerOtelWriteMetricsInternalServerError) GetPayload() *models.StderrErrResponse {
