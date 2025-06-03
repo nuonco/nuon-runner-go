@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetHelmReleaseOK) Code() int {
 }
 
 func (o *GetHelmReleaseOK) Error() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseOK %s", 200, payload)
 }
 
 func (o *GetHelmReleaseOK) String() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseOK %s", 200, payload)
 }
 
 func (o *GetHelmReleaseOK) GetPayload() *models.HelmRelease {
@@ -177,11 +180,13 @@ func (o *GetHelmReleaseBadRequest) Code() int {
 }
 
 func (o *GetHelmReleaseBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseBadRequest %s", 400, payload)
 }
 
 func (o *GetHelmReleaseBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseBadRequest %s", 400, payload)
 }
 
 func (o *GetHelmReleaseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetHelmReleaseUnauthorized) Code() int {
 }
 
 func (o *GetHelmReleaseUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *GetHelmReleaseUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *GetHelmReleaseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetHelmReleaseForbidden) Code() int {
 }
 
 func (o *GetHelmReleaseForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseForbidden %s", 403, payload)
 }
 
 func (o *GetHelmReleaseForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseForbidden %s", 403, payload)
 }
 
 func (o *GetHelmReleaseForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetHelmReleaseNotFound) Code() int {
 }
 
 func (o *GetHelmReleaseNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseNotFound %s", 404, payload)
 }
 
 func (o *GetHelmReleaseNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseNotFound %s", 404, payload)
 }
 
 func (o *GetHelmReleaseNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetHelmReleaseInternalServerError) Code() int {
 }
 
 func (o *GetHelmReleaseInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *GetHelmReleaseInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] getHelmReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *GetHelmReleaseInternalServerError) GetPayload() *models.StderrErrResponse {
