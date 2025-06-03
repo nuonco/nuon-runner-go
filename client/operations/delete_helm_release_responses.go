@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *DeleteHelmReleaseOK) Code() int {
 }
 
 func (o *DeleteHelmReleaseOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseOK %s", 200, payload)
 }
 
 func (o *DeleteHelmReleaseOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseOK %s", 200, payload)
 }
 
 func (o *DeleteHelmReleaseOK) GetPayload() []*models.AppHelmRelease {
@@ -175,11 +178,13 @@ func (o *DeleteHelmReleaseBadRequest) Code() int {
 }
 
 func (o *DeleteHelmReleaseBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseBadRequest %s", 400, payload)
 }
 
 func (o *DeleteHelmReleaseBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseBadRequest %s", 400, payload)
 }
 
 func (o *DeleteHelmReleaseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *DeleteHelmReleaseUnauthorized) Code() int {
 }
 
 func (o *DeleteHelmReleaseUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteHelmReleaseUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteHelmReleaseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *DeleteHelmReleaseForbidden) Code() int {
 }
 
 func (o *DeleteHelmReleaseForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseForbidden %s", 403, payload)
 }
 
 func (o *DeleteHelmReleaseForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseForbidden %s", 403, payload)
 }
 
 func (o *DeleteHelmReleaseForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *DeleteHelmReleaseNotFound) Code() int {
 }
 
 func (o *DeleteHelmReleaseNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseNotFound %s", 404, payload)
 }
 
 func (o *DeleteHelmReleaseNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseNotFound %s", 404, payload)
 }
 
 func (o *DeleteHelmReleaseNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *DeleteHelmReleaseInternalServerError) Code() int {
 }
 
 func (o *DeleteHelmReleaseInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteHelmReleaseInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/helm-releases/{helm_chart_id}/releases/{namespace}/{key}][%d] deleteHelmReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteHelmReleaseInternalServerError) GetPayload() *models.StderrErrResponse {

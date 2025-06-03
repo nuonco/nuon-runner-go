@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetInstallOwnerPlanCreated) Code() int {
 }
 
 func (o *GetInstallOwnerPlanCreated) Error() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanCreated %s", 201, payload)
 }
 
 func (o *GetInstallOwnerPlanCreated) String() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanCreated %s", 201, payload)
 }
 
 func (o *GetInstallOwnerPlanCreated) GetPayload() *models.AppInstallPlan {
@@ -177,11 +180,13 @@ func (o *GetInstallOwnerPlanBadRequest) Code() int {
 }
 
 func (o *GetInstallOwnerPlanBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallOwnerPlanBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallOwnerPlanBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetInstallOwnerPlanUnauthorized) Code() int {
 }
 
 func (o *GetInstallOwnerPlanUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallOwnerPlanUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallOwnerPlanUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetInstallOwnerPlanForbidden) Code() int {
 }
 
 func (o *GetInstallOwnerPlanForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanForbidden %s", 403, payload)
 }
 
 func (o *GetInstallOwnerPlanForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanForbidden %s", 403, payload)
 }
 
 func (o *GetInstallOwnerPlanForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetInstallOwnerPlanNotFound) Code() int {
 }
 
 func (o *GetInstallOwnerPlanNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanNotFound %s", 404, payload)
 }
 
 func (o *GetInstallOwnerPlanNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanNotFound %s", 404, payload)
 }
 
 func (o *GetInstallOwnerPlanNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetInstallOwnerPlanInternalServerError) Code() int {
 }
 
 func (o *GetInstallOwnerPlanInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallOwnerPlanInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/install/{install_id}/owner-plans/{owner_id}][%d] getInstallOwnerPlanInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallOwnerPlanInternalServerError) GetPayload() *models.StderrErrResponse {
