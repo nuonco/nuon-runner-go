@@ -43,6 +43,9 @@ type AppVCSConnectionCommit struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// vcs connection id
+	VcsConnectionID string `json:"vcs_connection_id,omitempty"`
 }
 
 // Validate validates this app v c s connection commit

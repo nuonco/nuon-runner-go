@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *LogStreamWriteLogsCreated) Code() int {
 }
 
 func (o *LogStreamWriteLogsCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsCreated %s", 201, payload)
 }
 
 func (o *LogStreamWriteLogsCreated) String() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsCreated %s", 201, payload)
 }
 
 func (o *LogStreamWriteLogsCreated) GetPayload() string {
@@ -175,11 +178,13 @@ func (o *LogStreamWriteLogsBadRequest) Code() int {
 }
 
 func (o *LogStreamWriteLogsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsBadRequest %s", 400, payload)
 }
 
 func (o *LogStreamWriteLogsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsBadRequest %s", 400, payload)
 }
 
 func (o *LogStreamWriteLogsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *LogStreamWriteLogsUnauthorized) Code() int {
 }
 
 func (o *LogStreamWriteLogsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsUnauthorized %s", 401, payload)
 }
 
 func (o *LogStreamWriteLogsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsUnauthorized %s", 401, payload)
 }
 
 func (o *LogStreamWriteLogsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *LogStreamWriteLogsForbidden) Code() int {
 }
 
 func (o *LogStreamWriteLogsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsForbidden %s", 403, payload)
 }
 
 func (o *LogStreamWriteLogsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsForbidden %s", 403, payload)
 }
 
 func (o *LogStreamWriteLogsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *LogStreamWriteLogsNotFound) Code() int {
 }
 
 func (o *LogStreamWriteLogsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsNotFound %s", 404, payload)
 }
 
 func (o *LogStreamWriteLogsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsNotFound %s", 404, payload)
 }
 
 func (o *LogStreamWriteLogsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *LogStreamWriteLogsInternalServerError) Code() int {
 }
 
 func (o *LogStreamWriteLogsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsInternalServerError %s", 500, payload)
 }
 
 func (o *LogStreamWriteLogsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/log-streams/{log_stream_id}/logs][%d] logStreamWriteLogsInternalServerError %s", 500, payload)
 }
 
 func (o *LogStreamWriteLogsInternalServerError) GetPayload() *models.StderrErrResponse {
