@@ -59,6 +59,7 @@ type Client interface {
 
 	// installs
 	CreateInstallPlan(ctx context.Context, installID string, req *models.ServiceCreateInstallPlanRequest) (*models.AppInstallPlan, error)
+	GetInstallOwnerPlan(ctx context.Context, installID, OwnerID string) (*models.AppInstallPlan, error)
 }
 
 var _ Client = (*client)(nil)

@@ -33,17 +33,20 @@ const (
 	// AppRunnerJobOperationTypeExec captures enum value "exec"
 	AppRunnerJobOperationTypeExec AppRunnerJobOperationType = "exec"
 
+	// AppRunnerJobOperationTypeBuild captures enum value "build"
+	AppRunnerJobOperationTypeBuild AppRunnerJobOperationType = "build"
+
 	// AppRunnerJobOperationTypeApply captures enum value "apply"
 	AppRunnerJobOperationTypeApply AppRunnerJobOperationType = "apply"
 
-	// AppRunnerJobOperationTypeDestroy captures enum value "destroy"
-	AppRunnerJobOperationTypeDestroy AppRunnerJobOperationType = "destroy"
+	// AppRunnerJobOperationTypeApplyDashPlan captures enum value "apply-plan"
+	AppRunnerJobOperationTypeApplyDashPlan AppRunnerJobOperationType = "apply-plan"
 
-	// AppRunnerJobOperationTypePlanDashOnly captures enum value "plan-only"
-	AppRunnerJobOperationTypePlanDashOnly AppRunnerJobOperationType = "plan-only"
+	// AppRunnerJobOperationTypeTeardown captures enum value "teardown"
+	AppRunnerJobOperationTypeTeardown AppRunnerJobOperationType = "teardown"
 
-	// AppRunnerJobOperationTypeBuild captures enum value "build"
-	AppRunnerJobOperationTypeBuild AppRunnerJobOperationType = "build"
+	// AppRunnerJobOperationTypeTeardownDashPlan captures enum value "teardown-plan"
+	AppRunnerJobOperationTypeTeardownDashPlan AppRunnerJobOperationType = "teardown-plan"
 
 	// AppRunnerJobOperationTypeUnknown captures enum value "unknown"
 	AppRunnerJobOperationTypeUnknown AppRunnerJobOperationType = "unknown"
@@ -54,7 +57,7 @@ var appRunnerJobOperationTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobOperationType
-	if err := json.Unmarshal([]byte(`["exec","apply","destroy","plan-only","build","unknown"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["exec","build","apply","apply-plan","teardown","teardown-plan","unknown"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

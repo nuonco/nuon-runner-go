@@ -57,8 +57,14 @@ const (
 	// AppRunnerJobTypeTerraformDashDeploy captures enum value "terraform-deploy"
 	AppRunnerJobTypeTerraformDashDeploy AppRunnerJobType = "terraform-deploy"
 
+	// AppRunnerJobTypeTerraformDashDeployDashPlan captures enum value "terraform-deploy-plan"
+	AppRunnerJobTypeTerraformDashDeployDashPlan AppRunnerJobType = "terraform-deploy-plan"
+
 	// AppRunnerJobTypeHelmDashChartDashDeploy captures enum value "helm-chart-deploy"
 	AppRunnerJobTypeHelmDashChartDashDeploy AppRunnerJobType = "helm-chart-deploy"
+
+	// AppRunnerJobTypeHelmDashChartDashDeployDashPlan captures enum value "helm-chart-deploy-plan"
+	AppRunnerJobTypeHelmDashChartDashDeployDashPlan AppRunnerJobType = "helm-chart-deploy-plan"
 
 	// AppRunnerJobTypeJobDashDeploy captures enum value "job-deploy"
 	AppRunnerJobTypeJobDashDeploy AppRunnerJobType = "job-deploy"
@@ -77,6 +83,9 @@ const (
 
 	// AppRunnerJobTypeSandboxDashTerraform captures enum value "sandbox-terraform"
 	AppRunnerJobTypeSandboxDashTerraform AppRunnerJobType = "sandbox-terraform"
+
+	// AppRunnerJobTypeSandboxDashTerraformDashPlan captures enum value "sandbox-terraform-plan"
+	AppRunnerJobTypeSandboxDashTerraformDashPlan AppRunnerJobType = "sandbox-terraform-plan"
 
 	// AppRunnerJobTypeSandboxDashSyncDashSecrets captures enum value "sandbox-sync-secrets"
 	AppRunnerJobTypeSandboxDashSyncDashSecrets AppRunnerJobType = "sandbox-sync-secrets"
@@ -99,7 +108,7 @@ var appRunnerJobTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobType
-	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","oci-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","update-version","noop","sandbox-terraform","sandbox-sync-secrets","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","oci-sync","noop-sync","terraform-deploy","terraform-deploy-plan","helm-chart-deploy","helm-chart-deploy-plan","job-deploy","noop-deploy","shut-down","update-version","noop","sandbox-terraform","sandbox-terraform-plan","sandbox-sync-secrets","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

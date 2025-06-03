@@ -20,3 +20,15 @@ func (c *client) CreateInstallPlan(ctx context.Context, installID string, req *m
 	return resp.Payload, nil
 }
 
+func (c *client) GetInstallOwnerPlan(ctx context.Context, installID, OwnerID string) (*models.AppInstallPlan, error) {
+	resp, err := c.genClient.Operations.GetInstallOwnerPlan(&operations.GetInstallOwnerPlanParams{
+		InstallID: installID,
+		OwnerID:   OwnerID,
+		Context:   ctx,
+	}, c.getAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
