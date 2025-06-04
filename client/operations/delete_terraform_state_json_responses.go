@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *DeleteTerraformStateJSONOK) Code() int {
 }
 
 func (o *DeleteTerraformStateJSONOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONOK) GetPayload() interface{} {
@@ -178,13 +175,11 @@ func (o *DeleteTerraformStateJSONBadRequest) Code() int {
 }
 
 func (o *DeleteTerraformStateJSONBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *DeleteTerraformStateJSONUnauthorized) Code() int {
 }
 
 func (o *DeleteTerraformStateJSONUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *DeleteTerraformStateJSONForbidden) Code() int {
 }
 
 func (o *DeleteTerraformStateJSONForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *DeleteTerraformStateJSONNotFound) Code() int {
 }
 
 func (o *DeleteTerraformStateJSONNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *DeleteTerraformStateJSONInternalServerError) Code() int {
 }
 
 func (o *DeleteTerraformStateJSONInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}/state][%d] deleteTerraformStateJsonInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteTerraformStateJSONInternalServerError) GetPayload() *models.StderrErrResponse {
