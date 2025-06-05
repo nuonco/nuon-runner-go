@@ -58,3 +58,4 @@ func (c *client) GetActionWorkflowLatestConfig(ctx context.Context, workflowID s
 
 	return resp.Payload, nil
 }
+

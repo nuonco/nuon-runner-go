@@ -17,6 +17,9 @@ import (
 // swagger:model service.CreateRunnerJobExecutionResultRequest
 type ServiceCreateRunnerJobExecutionResultRequest struct {
 
+	// contents
+	Contents string `json:"contents,omitempty"`
+
 	// error code
 	ErrorCode int64 `json:"error_code,omitempty"`
 
