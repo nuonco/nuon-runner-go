@@ -20,6 +20,9 @@ type ServiceCreateRunnerJobExecutionResultRequest struct {
 	// contents
 	Contents string `json:"contents,omitempty"`
 
+	// contents display
+	ContentsDisplay interface{} `json:"contents_display,omitempty"`
+
 	// error code
 	ErrorCode int64 `json:"error_code,omitempty"`
 

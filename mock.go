@@ -65,21 +65,6 @@ func (mr *MockClientMockRecorder) CreateHeartBeat(ctx, req interface{}) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateHeartBeat", reflect.TypeOf((*MockClient)(nil).CreateHeartBeat), ctx, req)
 }
 
-// CreateInstallPlan mocks base method.
-func (m *MockClient) CreateInstallPlan(ctx context.Context, installID string, req *models.ServiceCreateInstallPlanRequest) (*models.AppInstallPlan, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateInstallPlan", ctx, installID, req)
-	ret0, _ := ret[0].(*models.AppInstallPlan)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateInstallPlan indicates an expected call of CreateInstallPlan.
-func (mr *MockClientMockRecorder) CreateInstallPlan(ctx, installID, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallPlan", reflect.TypeOf((*MockClient)(nil).CreateInstallPlan), ctx, installID, req)
-}
-
 // CreateJobExecution mocks base method.
 func (m *MockClient) CreateJobExecution(ctx context.Context, jobID string, req *models.ServiceCreateRunnerJobExecutionRequest) (*models.AppRunnerJobExecution, error) {
 	m.ctrl.T.Helper()
@@ -183,21 +168,6 @@ func (m *MockClient) GetInstallActionWorkflowRun(ctx context.Context, installID,
 func (mr *MockClientMockRecorder) GetInstallActionWorkflowRun(ctx, installID, runID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallActionWorkflowRun", reflect.TypeOf((*MockClient)(nil).GetInstallActionWorkflowRun), ctx, installID, runID)
-}
-
-// GetInstallOwnerPlan mocks base method.
-func (m *MockClient) GetInstallOwnerPlan(ctx context.Context, installID, OwnerID string) (*models.AppInstallPlan, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallOwnerPlan", ctx, installID, OwnerID)
-	ret0, _ := ret[0].(*models.AppInstallPlan)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetInstallOwnerPlan indicates an expected call of GetInstallOwnerPlan.
-func (mr *MockClientMockRecorder) GetInstallOwnerPlan(ctx, installID, OwnerID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallOwnerPlan", reflect.TypeOf((*MockClient)(nil).GetInstallOwnerPlan), ctx, installID, OwnerID)
 }
 
 // GetJob mocks base method.

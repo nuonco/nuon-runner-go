@@ -21,7 +21,7 @@ type HelmRelease struct {
 
 	// Chart is the chart that was released.
 	Chart struct {
-		ChartChart
+		V2Chart
 	} `json:"chart,omitempty"`
 
 	// Config is the set of extra Values added to the chart.
@@ -29,11 +29,11 @@ type HelmRelease struct {
 	Config interface{} `json:"config,omitempty"`
 
 	// Hooks are all of the hooks declared for this release.
-	Hooks []*ReleaseHook `json:"hooks"`
+	Hooks []*V1Hook `json:"hooks"`
 
 	// Info provides information about a release
 	Info struct {
-		ReleaseInfo
+		V1Info
 	} `json:"info,omitempty"`
 
 	// Labels of the release.
