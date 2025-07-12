@@ -84,6 +84,12 @@ type GetRunnerJobsParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
 	/* RunnerID.
 
 	   runner ID
@@ -128,6 +134,8 @@ func (o *GetRunnerJobsParams) SetDefaults() {
 
 		offsetDefault = int64(0)
 
+		pageDefault = int64(0)
+
 		statusDefault = string("available")
 	)
 
@@ -135,6 +143,7 @@ func (o *GetRunnerJobsParams) SetDefaults() {
 		Group:  &groupDefault,
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 		Status: &statusDefault,
 	}
 
@@ -208,6 +217,17 @@ func (o *GetRunnerJobsParams) WithOffset(offset *int64) *GetRunnerJobsParams {
 // SetOffset adds the offset to the get runner jobs params
 func (o *GetRunnerJobsParams) SetOffset(offset *int64) {
 	o.Offset = offset
+}
+
+// WithPage adds the page to the get runner jobs params
+func (o *GetRunnerJobsParams) WithPage(page *int64) *GetRunnerJobsParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get runner jobs params
+func (o *GetRunnerJobsParams) SetPage(page *int64) {
+	o.Page = page
 }
 
 // WithRunnerID adds the runnerID to the get runner jobs params
@@ -297,6 +317,23 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}
