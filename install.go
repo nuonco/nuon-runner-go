@@ -7,13 +7,14 @@ import (
 	"github.com/nuonco/nuon-runner-go/models"
 )
 
-func (c *client) GetInstallComponentPreviousConfig(ctx context.Context, installId, componentId string) (*models.ServiceGetInstallComponentPreviousConfigResponse, error) {
+func (c *client) GetInstallComponentPreviousConfig(ctx context.Context, installId, componentID string) (*models.ServiceGetInstallComponentPreviousConfigResponse, error) {
 	resp, err := c.
 		genClient.
 		Operations.
 		GetInstallComponentPreviousConfig(&operations.GetInstallComponentPreviousConfigParams{
-			ComponentID: componentId,
+			ComponentID: componentID,
 			InstallID:   installId,
+			Context:     ctx,
 		}, c.getAuthInfo())
 	if err != nil {
 		return nil, err
