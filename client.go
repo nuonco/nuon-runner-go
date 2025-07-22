@@ -53,7 +53,7 @@ type Client interface {
 	GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error)
 
 	// installs
-	GetInstallComponentPreviousConfig(ctx context.Context, installId, componentId string) (*models.ServiceGetInstallComponentPreviousConfigResponse, error)
+	GetInstallComponenetLastActivePlan(ctx context.Context, installId, componentId string) (*models.ServiceGetInstallComponenetLastActivePlanResponse, error)
 
 	UpdateTerraformStateJSON(ctx context.Context, workspaceID string, jobID *string, reqBody any) (any, error)
 

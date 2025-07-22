@@ -56,15 +56,13 @@ type ClientService interface {
 
 	GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowLatestConfigOK, error)
 
-	GetAppConfigSyncRun(params *GetAppConfigSyncRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigSyncRunOK, error)
-
 	GetHelmRelease(params *GetHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmReleaseOK, error)
 
 	GetHelmReleases(params *GetHelmReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmReleasesOK, error)
 
 	GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunOK, error)
 
-	GetInstallComponentPreviousConfig(params *GetInstallComponentPreviousConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentPreviousConfigOK, error)
+	GetInstallComponenetLastActivePlan(params *GetInstallComponenetLastActivePlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponenetLastActivePlanOK, error)
 
 	GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error)
 
@@ -643,45 +641,6 @@ func (a *Client) GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestCo
 }
 
 /*
-GetAppConfigSyncRun gets the work record of syncing an app config
-*/
-func (a *Client) GetAppConfigSyncRun(params *GetAppConfigSyncRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigSyncRunOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAppConfigSyncRunParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetAppConfigSyncRun",
-		Method:             "GET",
-		PathPattern:        "/v1/apps/{app_id}/config-sync-run/{app_config_sync_run_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAppConfigSyncRunReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAppConfigSyncRunOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetAppConfigSyncRun: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetHelmRelease gets helm release
 */
 func (a *Client) GetHelmRelease(params *GetHelmReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmReleaseOK, error) {
@@ -801,24 +760,24 @@ func (a *Client) GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRun
 }
 
 /*
-GetInstallComponentPreviousConfig gets an install component s previous config
+GetInstallComponenetLastActivePlan gets an install component s previous config
 
 Fetch previous config of a particular install's component.
 */
-func (a *Client) GetInstallComponentPreviousConfig(params *GetInstallComponentPreviousConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentPreviousConfigOK, error) {
+func (a *Client) GetInstallComponenetLastActivePlan(params *GetInstallComponenetLastActivePlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponenetLastActivePlanOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetInstallComponentPreviousConfigParams()
+		params = NewGetInstallComponenetLastActivePlanParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetInstallComponentPreviousConfig",
+		ID:                 "GetInstallComponenetLastActivePlan",
 		Method:             "GET",
-		PathPattern:        "/v1/installs/{install_id}/{component_id}/previous-config",
+		PathPattern:        "/v1/installs/{install_id}/{component_id}/last-active-plan",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetInstallComponentPreviousConfigReader{formats: a.formats},
+		Reader:             &GetInstallComponenetLastActivePlanReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -831,13 +790,13 @@ func (a *Client) GetInstallComponentPreviousConfig(params *GetInstallComponentPr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetInstallComponentPreviousConfigOK)
+	success, ok := result.(*GetInstallComponenetLastActivePlanOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallComponentPreviousConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetInstallComponenetLastActivePlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

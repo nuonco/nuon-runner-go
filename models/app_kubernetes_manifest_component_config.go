@@ -29,7 +29,7 @@ type AppKubernetesManifestComponentConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// default null is not needed, this is only done for temporary local dev purposes
+	// manifest
 	Manifest string `json:"manifest,omitempty"`
 
 	// namespace

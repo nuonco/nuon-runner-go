@@ -170,19 +170,19 @@ func (mr *MockClientMockRecorder) GetInstallActionWorkflowRun(ctx, installID, ru
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallActionWorkflowRun", reflect.TypeOf((*MockClient)(nil).GetInstallActionWorkflowRun), ctx, installID, runID)
 }
 
-// GetInstallComponentPreviousConfig mocks base method.
-func (m *MockClient) GetInstallComponentPreviousConfig(ctx context.Context, installId, componentId string) (*models.ServiceGetInstallComponentPreviousConfigResponse, error) {
+// GetInstallComponenetLastActivePlan mocks base method.
+func (m *MockClient) GetInstallComponenetLastActivePlan(ctx context.Context, installId, componentId string) (*models.ServiceGetInstallComponenetLastActivePlanResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallComponentPreviousConfig", ctx, installId, componentId)
-	ret0, _ := ret[0].(*models.ServiceGetInstallComponentPreviousConfigResponse)
+	ret := m.ctrl.Call(m, "GetInstallComponenetLastActivePlan", ctx, installId, componentId)
+	ret0, _ := ret[0].(*models.ServiceGetInstallComponenetLastActivePlanResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetInstallComponentPreviousConfig indicates an expected call of GetInstallComponentPreviousConfig.
-func (mr *MockClientMockRecorder) GetInstallComponentPreviousConfig(ctx, installId, componentId interface{}) *gomock.Call {
+// GetInstallComponenetLastActivePlan indicates an expected call of GetInstallComponenetLastActivePlan.
+func (mr *MockClientMockRecorder) GetInstallComponenetLastActivePlan(ctx, installId, componentId interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallComponentPreviousConfig", reflect.TypeOf((*MockClient)(nil).GetInstallComponentPreviousConfig), ctx, installId, componentId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallComponenetLastActivePlan", reflect.TypeOf((*MockClient)(nil).GetInstallComponenetLastActivePlan), ctx, installId, componentId)
 }
 
 // GetJob mocks base method.

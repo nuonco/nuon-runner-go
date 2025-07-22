@@ -7,11 +7,11 @@ import (
 	"github.com/nuonco/nuon-runner-go/models"
 )
 
-func (c *client) GetInstallComponentPreviousConfig(ctx context.Context, installID, componentID string) (*models.ServiceGetInstallComponentPreviousConfigResponse, error) {
+func (c *client) GetInstallComponenetLastActivePlan(ctx context.Context, installID, componentID string) (*models.ServiceGetInstallComponenetLastActivePlanResponse, error) {
 	resp, err := c.
 		genClient.
 		Operations.
-		GetInstallComponentPreviousConfig(&operations.GetInstallComponentPreviousConfigParams{
+		GetInstallComponenetLastActivePlan(&operations.GetInstallComponenetLastActivePlanParams{
 			ComponentID: componentID,
 			InstallID:   installID,
 			Context:     ctx,
