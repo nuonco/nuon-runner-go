@@ -78,7 +78,7 @@ type AppRunnerGroupSettings struct {
 	OtelCollectorConfig string `json:"otel_collector_config,omitempty"`
 
 	// platform variable for use in the runner
-	Platform map[string]string `json:"platform,omitempty"`
+	Platform string `json:"platform,omitempty"`
 
 	// runner api url
 	RunnerAPIURL string `json:"runner_api_url,omitempty"`
