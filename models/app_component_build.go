@@ -19,7 +19,13 @@ import (
 // swagger:model app.ComponentBuild
 type AppComponentBuild struct {
 
-	// component config connection id
+	// checksum of our intermediate component config
+	Checksum string `json:"checksum,omitempty"`
+
+	// component config connection
+	ComponentConfigConnection *AppComponentConfigConnection `json:"component_config_connection,omitempty"`
+
+	// DEPRECATED: will retain the field to connect against the last component config connection that set this build
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
 
 	// component config version
@@ -49,14 +55,25 @@ type AppComponentBuild struct {
 	// install deploys
 	InstallDeploys []*AppInstallDeploy `json:"install_deploys"`
 
+	// log stream
+	LogStream *AppLogStream `json:"log_stream,omitempty"`
+
 	// releases
 	Releases []*AppComponentRelease `json:"releases"`
+
+	// runner details
+	RunnerJob struct {
+		AppRunnerJob
+	} `json:"runner_job,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
 
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
+
+	// status v2
+	StatusV2 *AppCompositeStatus `json:"status_v2,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -69,6 +86,10 @@ type AppComponentBuild struct {
 func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateComponentConfigConnection(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
@@ -77,7 +98,19 @@ func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateLogStream(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReleases(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerJob(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusV2(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -88,6 +121,25 @@ func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppComponentBuild) validateComponentConfigConnection(formats strfmt.Registry) error {
+	if swag.IsZero(m.ComponentConfigConnection) { // not required
+		return nil
+	}
+
+	if m.ComponentConfigConnection != nil {
+		if err := m.ComponentConfigConnection.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("component_config_connection")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("component_config_connection")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -136,6 +188,25 @@ func (m *AppComponentBuild) validateInstallDeploys(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *AppComponentBuild) validateLogStream(formats strfmt.Registry) error {
+	if swag.IsZero(m.LogStream) { // not required
+		return nil
+	}
+
+	if m.LogStream != nil {
+		if err := m.LogStream.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("log_stream")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("log_stream")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppComponentBuild) validateReleases(formats strfmt.Registry) error {
 	if swag.IsZero(m.Releases) { // not required
 		return nil
@@ -157,6 +228,33 @@ func (m *AppComponentBuild) validateReleases(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppComponentBuild) validateRunnerJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJob) { // not required
+		return nil
+	}
+
+	return nil
+}
+
+func (m *AppComponentBuild) validateStatusV2(formats strfmt.Registry) error {
+	if swag.IsZero(m.StatusV2) { // not required
+		return nil
+	}
+
+	if m.StatusV2 != nil {
+		if err := m.StatusV2.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -185,6 +283,10 @@ func (m *AppComponentBuild) validateVcsConnectionCommit(formats strfmt.Registry)
 func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateComponentConfigConnection(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -193,7 +295,19 @@ func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLogStream(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateReleases(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatusV2(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -204,6 +318,27 @@ func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppComponentBuild) contextValidateComponentConfigConnection(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ComponentConfigConnection != nil {
+
+		if swag.IsZero(m.ComponentConfigConnection) { // not required
+			return nil
+		}
+
+		if err := m.ComponentConfigConnection.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("component_config_connection")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("component_config_connection")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -253,6 +388,27 @@ func (m *AppComponentBuild) contextValidateInstallDeploys(ctx context.Context, f
 	return nil
 }
 
+func (m *AppComponentBuild) contextValidateLogStream(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LogStream != nil {
+
+		if swag.IsZero(m.LogStream) { // not required
+			return nil
+		}
+
+		if err := m.LogStream.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("log_stream")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("log_stream")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppComponentBuild) contextValidateReleases(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Releases); i++ {
@@ -273,6 +429,32 @@ func (m *AppComponentBuild) contextValidateReleases(ctx context.Context, formats
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppComponentBuild) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *AppComponentBuild) contextValidateStatusV2(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatusV2 != nil {
+
+		if swag.IsZero(m.StatusV2) { // not required
+			return nil
+		}
+
+		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
 	}
 
 	return nil
