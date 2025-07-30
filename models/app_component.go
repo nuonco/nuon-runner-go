@@ -27,9 +27,6 @@ type AppComponent struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *AppAccount `json:"created_by,omitempty"`
-
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
@@ -38,6 +35,9 @@ type AppComponent struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// links
+	Links interface{} `json:"links,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -51,6 +51,9 @@ type AppComponent struct {
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
 
+	// type
+	Type AppComponentType `json:"type,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
@@ -62,7 +65,7 @@ type AppComponent struct {
 func (m *AppComponent) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCreatedBy(formats); err != nil {
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,20 +75,18 @@ func (m *AppComponent) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppComponent) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
+func (m *AppComponent) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
 		}
+		return err
 	}
 
 	return nil
@@ -95,7 +96,7 @@ func (m *AppComponent) validateCreatedBy(formats strfmt.Registry) error {
 func (m *AppComponent) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -105,22 +106,19 @@ func (m *AppComponent) ContextValidate(ctx context.Context, formats strfmt.Regis
 	return nil
 }
 
-func (m *AppComponent) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppComponent) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.CreatedBy != nil {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
 
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
+	if err := m.Type.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
 		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
+		return err
 	}
 
 	return nil
