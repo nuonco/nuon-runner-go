@@ -67,7 +67,7 @@ type CreateRunnerHealthCheckParams struct {
 
 	   Input
 	*/
-	Req models.ServiceCreateRunnerHealthCheckRequest
+	Req *models.ServiceCreateRunnerHealthCheckRequest
 
 	/* RunnerID.
 
@@ -129,13 +129,13 @@ func (o *CreateRunnerHealthCheckParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithReq adds the req to the create runner health check params
-func (o *CreateRunnerHealthCheckParams) WithReq(req models.ServiceCreateRunnerHealthCheckRequest) *CreateRunnerHealthCheckParams {
+func (o *CreateRunnerHealthCheckParams) WithReq(req *models.ServiceCreateRunnerHealthCheckRequest) *CreateRunnerHealthCheckParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the create runner health check params
-func (o *CreateRunnerHealthCheckParams) SetReq(req models.ServiceCreateRunnerHealthCheckRequest) {
+func (o *CreateRunnerHealthCheckParams) SetReq(req *models.ServiceCreateRunnerHealthCheckRequest) {
 	o.Req = req
 }
 
