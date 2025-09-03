@@ -104,12 +104,6 @@ type GetRunnerJobsParams struct {
 	*/
 	Status *string
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -252,17 +246,6 @@ func (o *GetRunnerJobsParams) SetStatus(status *string) {
 	o.Status = status
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner jobs params
-func (o *GetRunnerJobsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetRunnerJobsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner jobs params
-func (o *GetRunnerJobsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -358,14 +341,6 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 			if err := r.SetQueryParam("status", qStatus); err != nil {
 				return err
 			}
-		}
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
 		}
 	}
 

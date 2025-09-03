@@ -100,12 +100,6 @@ type GetHelmReleaseParams struct {
 	*/
 	Page *int64
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -242,17 +236,6 @@ func (o *GetHelmReleaseParams) SetPage(page *int64) {
 	o.Page = page
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get helm release params
-func (o *GetHelmReleaseParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetHelmReleaseParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get helm release params
-func (o *GetHelmReleaseParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetHelmReleaseParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -324,14 +307,6 @@ func (o *GetHelmReleaseParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
-		}
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
 		}
 	}
 

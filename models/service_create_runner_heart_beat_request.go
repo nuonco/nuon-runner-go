@@ -23,6 +23,9 @@ type ServiceCreateRunnerHeartBeatRequest struct {
 	// Required: true
 	AliveTime *int64 `json:"alive_time"`
 
+	// process
+	Process string `json:"process,omitempty"`
+
 	// Making this required might break existing installs? Should update all installs to send this, then make it required?
 	Version string `json:"version,omitempty"`
 }
