@@ -21,7 +21,7 @@ type HelmRelease struct {
 
 	// Chart is the chart that was released.
 	Chart struct {
-		V2Chart
+		ChartChart
 	} `json:"chart,omitempty"`
 
 	// Config is the set of extra Values added to the chart.
