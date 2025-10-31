@@ -39,13 +39,11 @@ type AppWorkflowStepApproval struct {
 	// owner type
 	OwnerType string `json:"owner_type,omitempty"`
 
-	// the response object must be created by the user in the UI or CLI
-	Response struct {
-		AppWorkflowStepApprovalResponse
-	} `json:"response,omitempty"`
+	// response
+	Response map[string]string `json:"response,omitempty"`
 
 	// runner job
-	RunnerJob *AppRunnerJob `json:"runnerJob,omitempty"`
+	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
 
 	// the runner job where this approval was created
 	RunnerJobID string `json:"runner_job_id,omitempty"`
@@ -68,10 +66,6 @@ func (m *AppWorkflowStepApproval) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateInstallWorkflowStep(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateResponse(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -112,14 +106,6 @@ func (m *AppWorkflowStepApproval) validateInstallWorkflowStep(formats strfmt.Reg
 	return nil
 }
 
-func (m *AppWorkflowStepApproval) validateResponse(formats strfmt.Registry) error {
-	if swag.IsZero(m.Response) { // not required
-		return nil
-	}
-
-	return nil
-}
-
 func (m *AppWorkflowStepApproval) validateRunnerJob(formats strfmt.Registry) error {
 	if swag.IsZero(m.RunnerJob) { // not required
 		return nil
@@ -128,9 +114,9 @@ func (m *AppWorkflowStepApproval) validateRunnerJob(formats strfmt.Registry) err
 	if m.RunnerJob != nil {
 		if err := m.RunnerJob.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("runnerJob")
+				return ve.ValidateName("runner_job")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("runnerJob")
+				return ce.ValidateName("runner_job")
 			}
 			return err
 		}
@@ -183,10 +169,6 @@ func (m *AppWorkflowStepApproval) ContextValidate(ctx context.Context, formats s
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateResponse(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -226,11 +208,6 @@ func (m *AppWorkflowStepApproval) contextValidateInstallWorkflowStep(ctx context
 	return nil
 }
 
-func (m *AppWorkflowStepApproval) contextValidateResponse(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
 func (m *AppWorkflowStepApproval) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RunnerJob != nil {
@@ -241,9 +218,9 @@ func (m *AppWorkflowStepApproval) contextValidateRunnerJob(ctx context.Context, 
 
 		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("runnerJob")
+				return ve.ValidateName("runner_job")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("runnerJob")
+				return ce.ValidateName("runner_job")
 			}
 			return err
 		}

@@ -28,6 +28,9 @@ type AppAppPermissionsConfig struct {
 	// aws iam roles
 	AwsIamRoles []*AppAppAWSIAMRoleConfig `json:"aws_iam_roles"`
 
+	// break glass aws iam role
+	BreakGlassAwsIamRole *AppAppAWSIAMRoleConfig `json:"break_glass_aws_iam_role,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -60,6 +63,10 @@ func (m *AppAppPermissionsConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAwsIamRoles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBreakGlassAwsIamRole(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -102,6 +109,25 @@ func (m *AppAppPermissionsConfig) validateAwsIamRoles(formats strfmt.Registry) e
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppAppPermissionsConfig) validateBreakGlassAwsIamRole(formats strfmt.Registry) error {
+	if swag.IsZero(m.BreakGlassAwsIamRole) { // not required
+		return nil
+	}
+
+	if m.BreakGlassAwsIamRole != nil {
+		if err := m.BreakGlassAwsIamRole.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("break_glass_aws_iam_role")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("break_glass_aws_iam_role")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -161,6 +187,10 @@ func (m *AppAppPermissionsConfig) ContextValidate(ctx context.Context, formats s
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateBreakGlassAwsIamRole(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDeprovisionAwsIamRole(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -199,6 +229,27 @@ func (m *AppAppPermissionsConfig) contextValidateAwsIamRoles(ctx context.Context
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppAppPermissionsConfig) contextValidateBreakGlassAwsIamRole(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BreakGlassAwsIamRole != nil {
+
+		if swag.IsZero(m.BreakGlassAwsIamRole) { // not required
+			return nil
+		}
+
+		if err := m.BreakGlassAwsIamRole.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("break_glass_aws_iam_role")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("break_glass_aws_iam_role")
+			}
+			return err
+		}
 	}
 
 	return nil
