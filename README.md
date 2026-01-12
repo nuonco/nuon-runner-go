@@ -1,3 +1,7 @@
+# Deprecation ⚠️
+This repo is deprecated in favor of moving it [intree of Nuon repo](https://github.com/nuonco/nuon/tree/main/sdks/nuon-runner-go). 
+You can import it in your go.mod with `go get github.com/nuonco/nuon/sdks/nuon-runner-go`
+
 # nuon-runner-go
 
 The SDK that powers the Nuon runner.
